@@ -1,0 +1,10 @@
+{
+  "name": "ruffora",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/checkout.test.js",
+    "pages": "node scripts/build-pages.js",
+    "dev": "node scripts/serve.js 8080"
+  },
+  "engines": { "node": ">=20" }
+}
