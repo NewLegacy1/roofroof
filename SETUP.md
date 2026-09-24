@@ -13,9 +13,9 @@ This storefront was adapted from the Skitter template. Everything below is still
 
 ## 1b. Vet endorsement
 
-- [ ] Dr. Levi Cohen must be a real, licensed US veterinarian who approved the exact quote and the photo in writing. Keep the "Vet Consultant to Ruffora" disclosure: he has a paid relationship, and FTC endorsement rules require saying so.
+- [x] Dr. Levi Cohen is a real US veterinarian (confirmed by the owner).
+- [ ] Keep his written approval of the exact quote and photo on file. Keep the "Vet Consultant to Ruffora" disclosure, since FTC endorsement rules require disclosing the relationship.
 - [ ] His quote mentions **skin**. Nothing else on the page makes a skin claim, and none of the listed ingredients is described as supporting skin. Get this backed by evidence or ask him to reword it.
-- [ ] If the photo or person is a stand-in, remove the section (`id="vet"` in `site/index.html`) before launch.
 
 ## 2. Shopify
 
