@@ -4,11 +4,18 @@ This storefront was adapted from the Skitter template. Everything below is still
 
 ## 1. Product facts (from the supplier) — required before advertising
 
-- [ ] Final formula. `site/index.html` currently describes the **proposed** formula (probiotics, prebiotics, digestive enzymes) in the pitch, the "What's inside" accordion and the ingredient cards. Rewrite these to match the formula sheet and label exactly.
+- [ ] Ingredient carousel matches the formula sheet: 8-strain probiotic blend, pumpkin, honey, inulin, FOS. The FOS card text was written by us because the supplied copy stopped at its heading. Honey's copy was changed from "probiotic properties" to "prebiotic properties", since feeding good bacteria is what a prebiotic does.
+- [ ] "Research-backed" heading: keep the supporting studies on file.
 - [ ] Benefit wording. The page says Daily Gut helps support healthy digestion, gut balance and normal stool quality. Keep claims to what the label and supplier evidence support; no disease or treatment claims.
-- [ ] Chews per tub and daily serving by weight → `product.chewsPerTub` and `product.servingByWeightLb` in `site/catalog.js`. Until set, the serving guide shows size only and says amounts will match the label.
+- [ ] Chews per tub → `product.chewsPerTub` in `site/catalog.js` (then pack cards show chew counts). Daily serving (1 / 2 / 3 chews for under 11 kg / 11–34 kg / over 34 kg) is in the serving guide; confirm it matches the label.
 - [ ] Age, pregnancy/nursing and medication guidance from the label (FAQ + serving note).
 - [ ] Monthly cadence works for the pack sizes (does 1 tub last a month for a typical dog?).
+
+## 1b. Vet endorsement
+
+- [ ] Dr. Levi Cohen must be a real, licensed US veterinarian who approved the exact quote and the photo in writing. Keep the "Vet Consultant to Ruffora" disclosure: he has a paid relationship, and FTC endorsement rules require saying so.
+- [ ] His quote mentions **skin**. Nothing else on the page makes a skin claim, and none of the listed ingredients is described as supporting skin. Get this backed by evidence or ask him to reword it.
+- [ ] If the photo or person is a stand-in, remove the section (`id="vet"` in `site/index.html`) before launch.
 
 ## 2. Shopify
 

@@ -12,11 +12,10 @@
     variantGid: offer.variantId ? `gid://shopify/ProductVariant/${offer.variantId}` : '',
   }));
 
-  // Confirm against the final label. Leave a value null until the supplier confirms it; the page hides anything unconfirmed.
+  // Confirm against the final label. Leave null until the supplier confirms it; the pack cards hide chew counts until then.
+  // Daily serving (1 / 2 / 3 chews for small / medium / large dogs) lives in the serving guide in index.html.
   const product = {
     chewsPerTub: null,
-    // Daily chews by body weight, e.g. [{ upTo: 25, chews: 1 }, { upTo: 50, chews: 2 }, { upTo: Infinity, chews: 3 }]
-    servingByWeightLb: null,
   };
 
   const catalog = { offers, product };
