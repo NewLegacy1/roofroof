@@ -133,9 +133,14 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .pack .pr{text-align:right;display:grid;justify-items:end;gap:3px}
 .pack .pr .sub{display:flex;align-items:center;gap:6px}
 .pack .pr b{font-size:20px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.15}
-.pack .pr b small{font-size:13px;font-weight:700;color:var(--soft);letter-spacing:0}
 .pack .pr s{font-size:12.5px;color:var(--soft);font-variant-numeric:tabular-nums}
-.pack .pr .tot{font-size:11.5px;font-weight:500;color:var(--soft);font-variant-numeric:tabular-nums}
+.dog-size{display:grid;gap:8px}
+.dog-size p{font-size:14px;font-weight:700;color:var(--ink)}
+.size-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.size-opts button{min-height:52px;padding:6px 4px;border:1.5px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);font:800 14px/1.2 var(--ui);cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
+.size-opts button small{display:block;font-size:11px;font-weight:600;color:var(--soft);margin-top:2px}
+.size-opts button:hover{border-color:var(--sage)}
+.size-opts button[aria-pressed="true"]{background:var(--sage-bg);border-color:var(--green);box-shadow:0 3px 0 var(--green);color:var(--green)}
 .pill{background:var(--apricot-bg);color:var(--apricot-ink);font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:20px;white-space:nowrap}
 
 .sns{display:flex;align-items:center;gap:12px;border:1.5px solid var(--green);background:var(--sage-bg);border-radius:var(--r);padding:13px 14px;cursor:pointer;transition:background .15s,border-color .15s}
@@ -376,7 +381,16 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
         <li><svg><use href="#check"/></svg>Skip or cancel anytime</li>
       </ul>
 
-      <div class="choose">Choose your supply<span>Save more with more tubs</span></div>
+      <div class="dog-size">
+        <p id="size-label">Choose dog size:</p>
+        <div class="size-opts" id="size-opts" role="group" aria-labelledby="size-label">
+          <button type="button" data-pack="1" aria-pressed="false">Under 11 kg<small>under 25 lb</small></button>
+          <button type="button" data-pack="2" aria-pressed="false">11 - 34 kg<small>25–75 lb</small></button>
+          <button type="button" data-pack="3" aria-pressed="false">Over 34 kg<small>over 75 lb</small></button>
+        </div>
+      </div>
+
+      <div class="choose">Choose your supply<span>We picked one for your dog's size</span></div>
       <div class="packs" id="packs" role="radiogroup" aria-label="How many tubs"></div>
 
       <label class="sns" for="sns">
@@ -410,11 +424,11 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 
       <div class="acc">
         <details><summary><svg class="i"><use href="#paw"/></svg><span>Which supply is right for me?</span></summary><div class="body">
-          <p>Daily Gut works best as a <b>daily habit</b>, so pick the supply that keeps you from running out.</p>
+          <p>Daily Gut works best as a <b>daily habit</b>. Bigger dogs go through a tub faster, so we suggest a supply by size.</p>
           <div class="need">
-            <div><span>Trying it for the first time</span><span>1 tub</span></div>
-            <div><span>Keeping a spare on the shelf</span><span>2 tubs</span></div>
-            <div class="rec"><span>Two dogs, or the best price per tub</span><span>3 tubs</span></div>
+            <div><span>Under 11 kg (25 lb)</span><span>1 tub</span></div>
+            <div class="rec"><span>11 – 34 kg (25–75 lb)</span><span>2 tubs</span></div>
+            <div><span>Over 34 kg (75 lb), or two dogs</span><span>3 tubs</span></div>
           </div>
         </div></details>
         <!-- CONFIRM: replace with the supplier's confirmed active ingredients and amounts. -->
@@ -604,15 +618,14 @@ const {offers:OFFERS, product:PRODUCT}=window.RUFFORA;
 /* CONFIRM shipping before launch. null = "calculated at checkout". */
 const SHIP_ONE_TIME=null;          // e.g. 5.95
 const SUBSCRIPTION_FREE_SHIP=false; // true once the subscription shipping profile is free
-const state={pack:3,sns:true};
+const state={pack:2,sns:true};
 const $=id=>document.getElementById(id);
 const money=n=>"$"+n.toFixed(2);
 const priceOf=o=>state.sns?o.subscriptionPrice:o.price;
-const eachOf=o=>priceOf(o)/o.tubs;
 const tubsTxt=o=>`${o.tubs} tub${o.tubs>1?"s":""}`;
-const PACK_FIT={1:"Try it out",2:"Keep a spare on hand",3:"Pay for 2, get 3"};
+/* Suggested supply by dog size; the size buttons pick the matching pack. */
+const PACK_FIT={1:"For dogs under 11 kg",2:"For dogs 11 – 34 kg",3:"For dogs over 34 kg"};
 const PACK_DEAL={3:"3rd tub free"};
-const eachTxt=o=>o.tubs>1?money(eachOf(o))+"/tub":money(priceOf(o));
 const shipTxt=()=>state.sns&&SUBSCRIPTION_FREE_SHIP?"Free shipping":!state.sns&&SHIP_ONE_TIME!=null?`${money(SHIP_ONE_TIME)} shipping`:"Shipping calculated at checkout";
 
 function renderPacks(){
@@ -623,7 +636,7 @@ function renderPacks(){
       ${o.badge?`<span class="badge ${o.id===3?"dark":""}">${o.badge}</span>`:""}
       <input type="radio" name="pack" id="pack-${o.id}" value="${o.id}" ${o.id===state.pack?"checked":""}>
       <span class="nm"><strong>${o.name}</strong><small>${tubsTxt(o)}${chews}</small><span class="fit">${PACK_FIT[o.id]}</span></span>
-      <span class="pr"><b>${money(eachOf(o))}${o.tubs>1?"<small>/tub</small>":""}</b>${o.tubs>1?`<span class="tot">${money(now)} total</span>`:""}${off>0?`<span class="sub"><s>${money(o.compareAt)}</s><span class="pill">Save ${off}%</span></span>`:""}</span>
+      <span class="pr"><b>${money(now)}</b>${off>0?`<span class="sub"><s>${money(o.compareAt)}</s><span class="pill">Save ${off}%</span></span>`:""}</span>
     </label>`}).join("");
   document.querySelectorAll('input[name="pack"]').forEach(r=>r.addEventListener("change",e=>{state.pack=+e.target.value;update();showPackPhoto()}));
 }
@@ -637,7 +650,8 @@ function update(){
   const off=Math.round((1-now/o.compareAt)*100);
   $("deal-badge").textContent=PACK_DEAL[o.id]||(off>0?`Save ${off}%`:"");
   $("st-name").textContent=o.name;
-  $("st-price").textContent=o.tubs>1?`${eachTxt(o)} · ${money(now)} total`:eachTxt(o)+(state.sns?" · Subscribe & Save":" · One-time");
+  $("st-price").textContent=money(now)+(state.sns?" · Subscribe & Save":" · One-time");
+  document.querySelectorAll("#size-opts button").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.pack===o.id?"true":"false"));
 }
 /* Buy-box photo follows the selected pack (first thumbnail becomes that pack). Add the pack photo paths when you have them. */
 const PACK_PHOTO={1:"",2:"",3:""};
@@ -657,6 +671,7 @@ function showPackPhoto(){
   showPhoto(src,label);
 }
 $("sns").addEventListener("change",e=>{state.sns=e.target.checked;renderPacks();update()});
+document.querySelectorAll("#size-opts button").forEach(b=>b.addEventListener("click",()=>{state.pack=+b.dataset.pack;renderPacks();update();showPackPhoto()}));
 renderPacks();update();showPackPhoto();
 
 function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),2800)}
