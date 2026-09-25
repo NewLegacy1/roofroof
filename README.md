@@ -15,6 +15,7 @@ Landing page for **Ruffora Daily Gut** (Digestive Support Soft Chews for Dogs), 
 npm test          # checkout + pricing tests
 npm run pages     # rebuild help/policy pages after editing scripts/build-pages.js
 npm run dev       # static preview at http://localhost:8080 (use `vercel dev` to exercise /api)
+node scripts/build-preview.js <dir>   # self-contained shareable copy (no checkout/tracking)
 ```
 
 Brand: evergreen `#153E38`, ivory `#F7F2E8`, apricot `#E9AA80`, sage `#CBD8C3`, ink `#202C28`; Manrope. Logo files are in `site/assets/` (source in `site/assets/brand/`).
