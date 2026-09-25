@@ -95,12 +95,20 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .main-img.no-tags .tag,.main-img.no-tags .deal{display:none}
 .main-img .deal:empty{display:none}
 @media(min-width:768px){.main-img .deal{font-size:14px;padding:7px 14px;top:16px;right:16px}.main-img .tag{top:16px;left:16px}}
-.thumbs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
-.thumbs button{padding:0;border:2px solid transparent;border-radius:12px;background:none;cursor:pointer;aspect-ratio:1/1}
+.main-img{background:var(--ivory)}
+.main-img:before{display:none}
+.g-nav{position:absolute;top:50%;z-index:3;width:40px;height:40px;margin-top:-20px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--green);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px rgba(21,62,56,.18);transition:background .15s}
+.g-nav:hover{background:var(--white)}
+.g-nav svg{width:18px;height:18px}
+.g-nav.prev{left:10px}.g-nav.next{right:10px}
+.main-img .g-count{position:absolute;right:12px;bottom:12px;z-index:2;background:rgba(21,62,56,.82);color:var(--ivory);max-width:none;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:20px;font-variant-numeric:tabular-nums}
+.thumbs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0;scroll-behavior:smooth}
+.thumbs::-webkit-scrollbar{display:none}
+.thumbs button{flex:0 0 calc((100% - 30px)/5.5);padding:0;border:2px solid transparent;border-radius:12px;background:none;cursor:pointer;aspect-ratio:1/1}
+@media(min-width:900px){.thumbs button{flex-basis:calc((100% - 36px)/6.5)}}
 .thumbs button[aria-current="true"]{border-color:var(--green)}
-.thumbs .ph{width:100%;height:100%;border-radius:9px}
-.thumbs .ph:before{background-size:50% auto;background-position:center}
-.thumbs .ph span{display:none}
+.thumbs .ph{width:100%;height:100%;border-radius:9px;background:var(--ivory)}
+.thumbs .ph:before{display:none}
 
 .info{display:grid;gap:16px;min-width:0}
 .kicker{display:flex;flex-wrap:wrap;gap:6px}
@@ -275,6 +283,7 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .ing h3{font-size:19px}
 .ing h3 small{display:block;font-size:13px;font-weight:600;font-style:italic;color:var(--soft);letter-spacing:0;margin-top:2px}
 .ing p{font-size:14px;color:var(--muted)}
+.ing .amt{justify-self:start;background:var(--apricot-bg);color:var(--apricot-ink);font-size:12px;font-weight:800;padding:3px 10px;border-radius:20px}
 .ing ul{list-style:none;margin:4px 0 0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;gap:8px}
 .ing li{display:flex;gap:8px;font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.4}
 .ing li svg{width:16px;height:16px;flex-shrink:0;color:var(--green);margin-top:2px}
@@ -394,25 +403,29 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 <section class="pdp" id="shop">
   <div class="wrap">
     <div class="gallery">
-      <div class="ph main-img" id="main-img"><img class="shot" fetchpriority="high" decoding="async" id="main-photo" alt="" hidden><span id="main-fallback">Photo: Daily Gut tub</span><em class="tag" style="font-style:normal">Soft chews for dogs</em><strong class="deal" id="deal-badge"></strong></div>
+      <!-- Gallery order sells top-down: the pack chosen, why it works, what's in it, why it beats probiotics alone, how to serve, real use, label, lifestyle.
+           The first slot always shows the selected pack (PACK_PHOTO in the script). -->
+      <div class="ph main-img" id="main-img"><img class="shot" fetchpriority="high" decoding="async" id="main-photo" src="/assets/product/pack-2.webp" alt="Ruffora Daily Gut, 2 tubs" width="1254" height="1254"><span id="main-fallback" hidden></span><em class="tag" style="font-style:normal">Soft chews for dogs</em><strong class="deal" id="deal-badge"></strong><button type="button" class="g-nav prev" id="g-prev" aria-label="Previous photo"><svg><use href="#arrow-left"/></svg></button><button type="button" class="g-nav next" id="g-next" aria-label="Next photo"><svg><use href="#arrow-right"/></svg></button><span class="g-count" id="g-count" aria-hidden="true"></span></div>
       <div class="thumbs" id="thumbs">
-        <button type="button" aria-current="true" aria-label="Photo: Daily Gut tub" data-photo=""><div class="ph"></div></button>
-        <button type="button" aria-label="Photo: Tub label and directions" data-photo=""><div class="ph"></div></button>
-        <button type="button" aria-label="Photo: Soft chew close-up" data-photo="" data-clean><div class="ph"></div></button>
-        <button type="button" aria-label="Photo: Offering a chew by hand" data-photo="" data-clean><div class="ph"></div></button>
-        <button type="button" aria-label="Photo: Chew crumbled over food" data-photo="" data-clean><div class="ph"></div></button>
-        <button type="button" aria-label="Photo: Dog and owner on a walk" data-photo="" data-clean><div class="ph"></div></button>
+        <button type="button" aria-current="true" aria-label="Ruffora Daily Gut, 2 tubs" data-photo="/assets/product/pack-2.webp"><div class="ph"><img class="shot" src="/assets/product/pack-2.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="8 probiotic strains and 3 billion CFU in every soft chew" data-photo="/assets/product/benefits.webp"><div class="ph"><img class="shot" src="/assets/product/benefits.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="Five actives in every chew: probiotics, pumpkin, honey, inulin and FOS" data-photo="/assets/product/five-actives.webp"><div class="ph"><img class="shot" src="/assets/product/five-actives.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="Daily Gut compared with probiotics alone" data-photo="/assets/product/comparison.webp"><div class="ph"><img class="shot" src="/assets/product/comparison.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="Two ways to serve: offer by hand or crumble over food" data-photo="/assets/product/two-ways.webp"><div class="ph"><img class="shot" src="/assets/product/two-ways.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="Golden retriever taking a Daily Gut chew by hand" data-photo="/assets/product/hand-feed.webp"><div class="ph"><img class="shot" src="/assets/product/hand-feed.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="Open tub of Daily Gut soft chews" data-photo="/assets/product/open-tub.webp"><div class="ph"><img class="shot" src="/assets/product/open-tub.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="Daily Gut product facts label" data-photo="/assets/product/label.webp"><div class="ph"><img class="shot" src="/assets/product/label.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="Owner relaxing on the couch with her golden retriever and a tub of Daily Gut" data-photo="/assets/product/lifestyle-couch.webp"><div class="ph"><img class="shot" src="/assets/product/lifestyle-couch.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
       </div>
     </div>
 
     <div class="info">
-      <div class="kicker"><span>Digestive support</span><span>Soft chew</span></div>
+      <div class="kicker"><span>8 probiotic strains</span><span>3 billion CFU per chew</span><span>Soft chew</span></div>
       <h1>Daily Gut<small>Digestive Support Soft Chews for Dogs</small></h1>
-      <!-- CONFIRM: benefit wording must match the final product and label. -->
-      <p class="pitch">A daily soft chew to help support healthy digestion, gut balance and normal stool quality.* Give it by hand like a treat, or add it to their food.</p>
+      <p class="pitch">Probiotics plus prebiotic fiber in one tasty soft chew: 8 beneficial strains with pumpkin, honey, inulin and FOS to help support healthy digestion, gut balance and normal stool quality.*</p>
 
       <ul class="quick-trust">
-        <li><svg><use href="#check"/></svg>Easy daily soft chew</li>
+        <li><svg><use href="#check"/></svg>A month's supply, sized to your dog</li>
         <li><svg><use href="#check"/></svg>30-day guarantee</li>
         <li><svg><use href="#check"/></svg>Skip or cancel anytime</li>
       </ul>
@@ -426,7 +439,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
         </div>
       </div>
 
-      <div class="choose">Choose your supply<span>We picked one for your dog's size</span></div>
+      <div class="choose">Choose your supply<span>Each lasts about a month</span></div>
       <div class="packs" id="packs" role="radiogroup" aria-label="How many tubs"></div>
 
       <label class="sns" for="sns">
@@ -460,11 +473,11 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 
       <div class="acc">
         <details><summary><svg class="i"><use href="#paw"/></svg><span>Which supply is right for me?</span></summary><div class="body">
-          <p>Daily Gut works best as a <b>daily habit</b>. Bigger dogs go through a tub faster, so we suggest a supply by size.</p>
+          <p>Each tub has <b>30 soft chews</b>. Bigger dogs get more chews a day, so we match the supply to your dog and every size lasts <b>about a month</b>.</p>
           <div class="need">
-            <div><span>Under 11 kg (25 lb)</span><span>1 tub</span></div>
-            <div class="rec"><span>11 – 34 kg (25–75 lb)</span><span>2 tubs</span></div>
-            <div><span>Over 34 kg (75 lb), or two dogs</span><span>3 tubs</span></div>
+            <div><span>Under 11 kg · 1 chew a day</span><span>1 tub</span></div>
+            <div class="rec"><span>11 – 34 kg · 2 chews a day</span><span>2 tubs</span></div>
+            <div><span>Over 34 kg · 3 chews a day</span><span>3 tubs</span></div>
           </div>
         </div></details>
         <details><summary><svg class="i"><use href="#leaf"/></svg><span>What's inside</span></summary><div class="body">
@@ -526,11 +539,11 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 <!-- How it works -->
 <section class="sec tint">
   <div class="wrap">
-    <div class="sec-head"><div class="eyebrow">How it works</div><h2>One chew. Every day. That's it.</h2></div>
+    <div class="sec-head"><div class="eyebrow">How it works</div><h2>Easy to give. Easy to keep up.</h2></div>
     <div class="steps">
-      <div class="step"><div class="ph"><span>Photo: owner offering a chew by hand</span></div><h3><span class="n">1</span>Offer it</h3><p>By hand as a treat, or crumbled over breakfast.</p></div>
-      <div class="step"><div class="ph"><span>Photo: dog waiting by the food bowl</span></div><h3><span class="n">2</span>Make it routine</h3><p>Same time each day, like after the morning walk. Consistency is what counts.</p></div>
-      <div class="step"><div class="ph"><span>Photo: tub delivered at the front door</span></div><h3><span class="n">3</span>Stay stocked</h3><p>Subscribers get a fresh supply every month, so the routine never breaks.</p></div>
+      <div class="step"><div class="ph"><img class="shot" src="/assets/product/hand-feed.webp" alt="Golden retriever taking a soft chew by hand" loading="lazy"></div><h3><span class="n">1</span>Offer it</h3><p>Dogs take it like a treat. Most won't know it's a supplement.</p></div>
+      <div class="step"><div class="ph"><img class="shot" src="/assets/product/crumble-food.webp" alt="Soft chew crumbled over kibble in a dog bowl" loading="lazy"></div><h3><span class="n">2</span>Or add it to food</h3><p>Picky eater? Crumble it over their bowl. Same time each day works best.</p></div>
+      <div class="step"><div class="ph"><img class="shot" src="/assets/product/pack-3.webp" alt="Three tubs of Daily Gut" loading="lazy"></div><h3><span class="n">3</span>Stay stocked</h3><p>Each order is a month's supply for your dog's size. Subscribers get the next one on time and save 15%.</p></div>
     </div>
     <div class="steps-bar" aria-hidden="true"><span class="track"><span class="fill"></span></span><span class="count">1 / 3</span></div>
   </div>
@@ -539,7 +552,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 <!-- Serving guide. Rows share the dog-size choice with the buy box: picking a row also picks the suggested pack. -->
 <section class="sec" id="serving">
   <div class="wrap">
-    <div class="sec-head"><div class="eyebrow">Serving guide</div><h2>How much for your dog?</h2><p>Pick your dog's size to see the daily amount.</p></div>
+    <div class="sec-head"><div class="eyebrow">Serving guide</div><h2>How much for your dog?</h2><p>Pick your dog's size. Every suggested supply lasts about a month.</p></div>
     <div class="serve" id="serve" role="group" aria-label="Dog size">
       <div class="serve-head"><span>Dog size</span><span>Daily</span></div>
       <button type="button" class="serve-row" data-pack="1" aria-pressed="false"><span><b>Small</b><small>Under 11 kg</small></span><span class="dose"><i aria-hidden="true"><span class="chew"></span></i>1 soft chew</span></button>
@@ -552,17 +565,17 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 </section>
 
 <!-- What's inside -->
-<!-- CONFIRM: the FOS card was written here (the supplied copy stopped at its heading); check it against the formula sheet. -->
+<!-- Amounts per 4 g soft chew, from the product facts label. -->
 <section class="sec sage" id="ingredients">
   <div class="wrap">
     <div class="sec-head"><div class="eyebrow">What's inside</div><h2>Research-backed active ingredients</h2></div>
     <div class="ing-bar"><button type="button" id="ing-prev" aria-label="Previous"><svg><use href="#arrow-left"/></svg></button><button type="button" id="ing-next" aria-label="Next"><svg><use href="#arrow-right"/></svg></button></div>
     <div class="ing-track" id="ing-track">
-      <article class="ing"><svg><use href="#microscope"/></svg><h3>A Blend of 8 Beneficial Bacteria Strains</h3><p>A robust blend of probiotics that supports digestive function, gut balance, and immune health.</p><ul><li><svg><use href="#check"/></svg>Helps maintain a healthy balance of gut flora</li><li><svg><use href="#check"/></svg>Supports normal digestion and comfort</li><li><svg><use href="#check"/></svg>Promotes healthy immune system function and response</li></ul></article>
-      <article class="ing"><svg><use href="#pumpkin"/></svg><h3>Pumpkin Fruit<small>Cucurbita pepo</small></h3><p>Pumpkin is an excellent source of fibre and vitamins. Its soluble fibre helps support digestion and promote the growth of beneficial bacteria in the gut microbiome.</p><ul><li><svg><use href="#check"/></svg>Helps maintain normal digestive function</li><li><svg><use href="#check"/></svg>Supports a normal inflammatory response</li><li><svg><use href="#check"/></svg>Provides antioxidant benefits</li></ul></article>
-      <article class="ing"><svg><use href="#honey"/></svg><h3>Honey</h3><p>Honey has prebiotic properties, meaning it can help feed the good bacteria in the gut and support their growth.</p><ul><li><svg><use href="#check"/></svg>Promotes the growth of proper gut microflora</li><li><svg><use href="#check"/></svg>Supports the immune system and a normal inflammatory response</li><li><svg><use href="#check"/></svg>Provides antioxidant benefits</li></ul></article>
-      <article class="ing"><svg><use href="#sprout"/></svg><h3>Inulin</h3><p>This prebiotic fibre acts as a food source for the beneficial bacteria in the gut, helping to promote their growth and supporting a healthy gut microbiome. Inulin can also support digestion and regularity.</p><ul><li><svg><use href="#check"/></svg>Can support a good flora balance within the gut</li><li><svg><use href="#check"/></svg>Helps maintain gut barrier integrity</li><li><svg><use href="#check"/></svg>Helps maintain normal stool consistency</li></ul></article>
-      <article class="ing"><svg><use href="#leaf"/></svg><h3>Fructooligosaccharides<small>FOS</small></h3><p>A naturally occurring prebiotic fibre that feeds the beneficial bacteria in the gut and works alongside the probiotic blend.</p><ul><li><svg><use href="#check"/></svg>Helps feed beneficial gut bacteria</li><li><svg><use href="#check"/></svg>Supports a balanced gut microbiome</li><li><svg><use href="#check"/></svg>Supports normal digestion</li></ul></article>
+      <article class="ing"><svg><use href="#microscope"/></svg><span class="amt">3 billion CFU per chew</span><h3>A Blend of 8 Beneficial Bacteria Strains</h3><p>A robust blend of probiotics that supports digestive function, gut balance, and immune health.</p><ul><li><svg><use href="#check"/></svg>Helps maintain a healthy balance of gut flora</li><li><svg><use href="#check"/></svg>Supports normal digestion and comfort</li><li><svg><use href="#check"/></svg>Promotes healthy immune system function and response</li></ul></article>
+      <article class="ing"><svg><use href="#pumpkin"/></svg><span class="amt">350 mg per chew</span><h3>Pumpkin Fruit<small>Cucurbita pepo</small></h3><p>Pumpkin is an excellent source of fibre and vitamins. Its soluble fibre helps support digestion and promote the growth of beneficial bacteria in the gut microbiome.</p><ul><li><svg><use href="#check"/></svg>Helps maintain normal digestive function</li><li><svg><use href="#check"/></svg>Supports a normal inflammatory response</li><li><svg><use href="#check"/></svg>Provides antioxidant benefits</li></ul></article>
+      <article class="ing"><svg><use href="#honey"/></svg><span class="amt">140 mg per chew</span><h3>Honey</h3><p>Honey has prebiotic properties, meaning it can help feed the good bacteria in the gut and support their growth.</p><ul><li><svg><use href="#check"/></svg>Promotes the growth of proper gut microflora</li><li><svg><use href="#check"/></svg>Supports the immune system and a normal inflammatory response</li><li><svg><use href="#check"/></svg>Provides antioxidant benefits</li></ul></article>
+      <article class="ing"><svg><use href="#sprout"/></svg><span class="amt">75 mg per chew · from chicory root</span><h3>Inulin</h3><p>This prebiotic fibre acts as a food source for the beneficial bacteria in the gut, helping to promote their growth and supporting a healthy gut microbiome. Inulin can also support digestion and regularity.</p><ul><li><svg><use href="#check"/></svg>Can support a good flora balance within the gut</li><li><svg><use href="#check"/></svg>Helps maintain gut barrier integrity</li><li><svg><use href="#check"/></svg>Helps maintain normal stool consistency</li></ul></article>
+      <article class="ing"><svg><use href="#leaf"/></svg><span class="amt">50 mg per chew · from beet root</span><h3>Fructooligosaccharides<small>FOS</small></h3><p>A naturally occurring prebiotic fibre that feeds the beneficial bacteria in the gut and works alongside the probiotic blend.</p><ul><li><svg><use href="#check"/></svg>Helps feed beneficial gut bacteria</li><li><svg><use href="#check"/></svg>Supports a balanced gut microbiome</li><li><svg><use href="#check"/></svg>Supports normal digestion</li></ul></article>
     </div>
     <div class="ing-dots" id="ing-dots" aria-hidden="true"></div>
     <p class="note">See the tub label for the complete ingredient list and guaranteed analysis.</p>
@@ -575,7 +588,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
     <div class="why">
       <div class="why-head"><span>Why Ruffora</span><h3>Daily care that's easy to keep up</h3></div>
       <div class="why-grid">
-        <div><b class="num"><span data-count="0">0</span> pills</b><strong>To hide in cheese</strong><span>It's a soft chew, so there's nothing to hide.</span></div>
+        <div><b class="num"><span data-count="3">3</span>B CFU</b><strong>In every chew</strong><span>8 probiotic strains plus 4 prebiotic actives.</span></div>
         <div><b class="num"><span data-count="15">15</span>% off</b><strong>Every subscription</strong><span>On top of bundle pricing. Skip or cancel anytime.</span></div>
         <div><b class="num">3 for 2</b><strong>Bundle price</strong><span>Buy two tubs and the third is free.</span></div>
         <div><b class="num"><span data-count="30">30</span> days</b><strong>Money-back guarantee</strong><span>Even if the tub is open. Email us for a full refund.</span></div>
@@ -587,7 +600,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 <!-- Mission -->
 <section class="sec tint">
   <div class="wrap mission">
-    <div class="ph"><span>Photo: dog and owner relaxing at home</span></div>
+    <div class="ph"><img class="shot" src="/assets/product/lifestyle-couch.webp" alt="Owner relaxing on the couch with her golden retriever" loading="lazy"></div>
     <div class="copy">
       <div class="eyebrow">Our mission</div>
       <h2>More good days together.</h2>
@@ -628,6 +641,8 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
     <div class="sec-head"><div class="eyebrow">FAQ</div><h2>Good questions</h2></div>
     <div class="acc faq">
       <details><summary><span>What does Daily Gut do?</span></summary><div class="body"><p>Daily Gut is a digestive support supplement. It's made to help support healthy digestion, gut balance and normal stool quality as part of your dog's daily routine.*</p></div></details>
+      <details><summary><span>How long does a tub last?</span></summary><div class="body"><p>Each tub has 30 soft chews. That's 30 days for a small dog (1 a day), 15 days for a medium dog (2 a day) and 10 days for a large dog (3 a day). That's why we suggest 1, 2 or 3 tubs by size: each is about a month.</p></div></details>
+      <details><summary><span>What else is in the chew?</span></summary><div class="body"><p>Besides the five actives, each chew contains ascorbic acid, brewer's yeast, glycerin (coconut), hickory smoke flavour, mixed tocopherols, molasses, pork gelatin, salmon oil, spray-dried pork liver, sunflower lecithin, tapioca starch and whey. It contains pork, fish and dairy, so check with your vet if your dog has food allergies.</p></div></details>
       <details><summary><span>How do I give it?</span></summary><div class="body"><p>Offer the chews by hand like a treat, or crumble them over food. Use the <a href="#serving">serving guide</a> and the label on your tub for the daily amount.</p></div></details>
       <details><summary><span>How soon will I notice a difference?</span></summary><div class="body"><p>Every dog is different. Give Daily Gut every day as directed; consistency matters more than anything. If digestive problems are sudden, severe or don't go away, see your vet.</p></div></details>
       <details><summary><span>Is it a medicine?</span></summary><div class="body"><p>No. Daily Gut is a supplement for everyday care. It isn't intended to diagnose, treat, cure or prevent any disease. If your dog has a health condition, is on medication, or is pregnant or nursing, check with your vet first.</p></div></details>
@@ -669,7 +684,7 @@ const money=n=>"$"+n.toFixed(2);
 const priceOf=o=>state.sns?o.subscriptionPrice:o.price;
 const tubsTxt=o=>`${o.tubs} tub${o.tubs>1?"s":""}`;
 /* Suggested supply by dog size; the size buttons pick the matching pack. */
-const PACK_FIT={1:"For dogs under 11 kg",2:"For dogs 11 – 34 kg",3:"For dogs over 34 kg"};
+const PACK_FIT={1:"30-day supply · dogs under 11 kg",2:"30-day supply · dogs 11 – 34 kg",3:"30-day supply · dogs over 34 kg"};
 const PACK_DEAL={3:"3rd tub free"};
 const shipTxt=()=>state.sns&&SUBSCRIPTION_FREE_SHIP?"Free shipping":!state.sns&&SHIP_ONE_TIME!=null?`${money(SHIP_ONE_TIME)} shipping`:"Shipping calculated at checkout";
 
@@ -697,10 +712,10 @@ function update(){
   $("st-name").textContent=o.name;
   $("st-price").textContent=money(now)+(state.sns?" · Subscribe & Save":" · One-time");
   document.querySelectorAll("#size-opts button, #serve .serve-row").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.pack===o.id?"true":"false"));
-  $("serve-suggest").innerHTML=`Suggested supply: <b>${tubsTxt(o)}</b> · ${money(now)}${state.sns?"/month":""}`;
+  $("serve-suggest").innerHTML=`Suggested: <b>${tubsTxt(o)}</b>${PRODUCT.chewsPerTub?` (${o.tubs*PRODUCT.chewsPerTub} chews, about 30 days)`:""} · ${money(now)}${state.sns?"/month":""}`;
 }
 /* Buy-box photo follows the selected pack (first thumbnail becomes that pack). Add the pack photo paths when you have them. */
-const PACK_PHOTO={1:"",2:"",3:""};
+const PACK_PHOTO={1:"/assets/product/pack-1.webp",2:"/assets/product/pack-2.webp",3:"/assets/product/pack-3.webp"};
 Object.values(PACK_PHOTO).filter(Boolean).forEach(src=>{new Image().src=src});
 function showPhoto(src,label){
   $("main-photo").hidden=!src;
@@ -708,13 +723,22 @@ function showPhoto(src,label){
   $("main-fallback").hidden=!!src;
   $("main-fallback").textContent=label;
 }
+/* Gallery: slot 1 is the selected pack; arrows, thumbnails and swipes move through the rest. */
+const gThumbs=()=>[...document.querySelectorAll("#thumbs button")];
+var gCur=0;
+function showSlide(i){
+  const t=gThumbs(); gCur=(i+t.length)%t.length; const b=t[gCur];
+  t.forEach(x=>x.setAttribute("aria-current",x===b?"true":"false"));
+  $("main-img").classList.toggle("no-tags",gCur!==0);
+  showPhoto(b.dataset.photo,b.getAttribute("aria-label"));
+  $("g-count").textContent=`${gCur+1} / ${t.length}`;
+  const strip=$("thumbs"); strip.scrollLeft=b.offsetLeft-strip.offsetLeft-(strip.clientWidth-b.offsetWidth)/2;
+}
 function showPackPhoto(){
-  const o=OFFERS.find(x=>x.id===state.pack), src=PACK_PHOTO[o.id], label=`Photo: Daily Gut, ${tubsTxt(o)}`;
-  const first=document.querySelector("#thumbs button");
-  first.setAttribute("data-photo",src); first.setAttribute("aria-label",label);
-  document.querySelectorAll("#thumbs button").forEach(x=>x.setAttribute("aria-current",x===first?"true":"false"));
-  $("main-img").classList.remove("no-tags");
-  showPhoto(src,label);
+  const o=OFFERS.find(x=>x.id===state.pack), src=PACK_PHOTO[o.id], label=`Ruffora Daily Gut, ${tubsTxt(o)}`;
+  const first=gThumbs()[0];
+  first.dataset.photo=src; first.setAttribute("aria-label",label); first.querySelector("img").src=src;
+  showSlide(0);
 }
 $("sns").addEventListener("change",e=>{state.sns=e.target.checked;renderPacks();update()});
 document.querySelectorAll("#size-opts button, #serve .serve-row").forEach(b=>b.addEventListener("click",()=>{state.pack=+b.dataset.pack;renderPacks();update();showPackPhoto()}));
@@ -739,18 +763,15 @@ async function goToCheckout(){
 }
 $("cta").addEventListener("click",goToCheckout);
 
-/* Thumbnails */
-const thumbs=[...document.querySelectorAll("#thumbs button")];
-thumbs.forEach(b=>{
-  const src=b.getAttribute("data-photo");
-  if(src) b.querySelector(".ph").innerHTML=`<img class="shot" src="${src}" alt="">`;
-  b.addEventListener("click",()=>{
-    thumbs.forEach(x=>x.setAttribute("aria-current","false"));
-    b.setAttribute("aria-current","true");
-    $("main-img").classList.toggle("no-tags",b.hasAttribute("data-clean"));
-    showPhoto(b.getAttribute("data-photo"),b.getAttribute("aria-label"));
-  });
-});
+/* Gallery controls */
+gThumbs().forEach((b,i)=>b.addEventListener("click",()=>showSlide(i)));
+$("g-prev").addEventListener("click",()=>showSlide(gCur-1));
+$("g-next").addEventListener("click",()=>showSlide(gCur+1));
+(function(){
+  let x0=null;
+  $("main-img").addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
+  $("main-img").addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>40)showSlide(gCur+(dx<0?1:-1))});
+})();
 
 /* Ingredients carousel: arrows move one card; dots follow the scroll position */
 (function(){

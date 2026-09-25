@@ -12,10 +12,10 @@
     variantGid: offer.variantId ? `gid://shopify/ProductVariant/${offer.variantId}` : '',
   }));
 
-  // Confirm against the final label. Leave null until the supplier confirms it; the pack cards hide chew counts until then.
+  // From the product label.
   // Daily serving (1 / 2 / 3 chews for small / medium / large dogs) lives in the serving guide in index.html.
   const product = {
-    chewsPerTub: null,
+    chewsPerTub: 30, // from the label: 30 soft chews (4 g) per tub
   };
 
   const catalog = { offers, product };

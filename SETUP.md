@@ -4,10 +4,12 @@ This storefront was adapted from the Skitter template. Everything below is still
 
 ## 1. Product facts (from the supplier) — required before advertising
 
-- [ ] Ingredient carousel matches the formula sheet: 8-strain probiotic blend, pumpkin, honey, inulin, FOS. The FOS card text was written by us because the supplied copy stopped at its heading. Honey's copy was changed from "probiotic properties" to "prebiotic properties", since feeding good bacteria is what a prebiotic does.
+- [x] Ingredient carousel matches the label: 8-strain blend (3 billion CFU), pumpkin 350 mg, honey 140 mg, inulin 75 mg, FOS 50 mg per chew.
+- [ ] FOS card text was written by us (the supplied copy stopped at its heading). Honey was changed from "probiotic" to "prebiotic properties".
 - [ ] "Research-backed" heading: keep the supporting studies on file.
 - [ ] Benefit wording. The page says Daily Gut helps support healthy digestion, gut balance and normal stool quality. Keep claims to what the label and supplier evidence support; no disease or treatment claims.
-- [ ] Chews per tub → `product.chewsPerTub` in `site/catalog.js` (then pack cards show chew counts). Daily serving (1 / 2 / 3 chews for under 11 kg / 11–34 kg / over 34 kg) is in the serving guide; confirm it matches the label.
+- [x] 30 chews per tub (4 g each), 3 billion CFU per chew, from the product facts label.
+- [ ] Daily serving (1 / 2 / 3 chews for under 11 kg / 11–34 kg / over 34 kg) matches the label directions.
 - [ ] Age, pregnancy/nursing and medication guidance from the label (FAQ + serving note).
 - [ ] Monthly cadence works for the pack sizes (does 1 tub last a month for a typical dog?).
 
@@ -39,12 +41,21 @@ This storefront was adapted from the Skitter template. Everything below is still
 
 ## 4. Photography
 
-Every photo slot shows a labelled placeholder. Add images to `site/assets/`, then:
-- Gallery: set each thumbnail button's `data-photo` in `site/index.html`.
-- Pack photos (1, 2, 3 tubs): `PACK_PHOTO` in the page script.
-- How-it-works steps and the mission block: replace the `<div class="ph"><span>…</span></div>` placeholders with `<div class="ph"><img class="shot" src="…" alt="…"></div>`.
+Product images are in `site/assets/product/`. The buy-box gallery order is set in `site/index.html`:
 
-Shot list: tub front; label/directions; chew close-up; hand-feeding; chew over food; dog and owner on a walk; dog by the food bowl; tub at the front door; dog and owner at home; 1-, 2- and 3-tub pack shots.
+1. Selected pack: `pack-1`, `pack-2` or `pack-3`, switched by `PACK_PHOTO` when the dog size or supply changes
+2. `benefits`: 8 strains, 3 billion CFU
+3. `five-actives`: ingredient amounts
+4. `comparison`: vs. probiotics alone
+5. `two-ways`: by hand or over food
+6. `hand-feed`
+7. `open-tub`
+8. `label`: product facts
+9. `lifestyle-couch`
+
+`hand-feed`, `crumble-food` and `pack-3` also illustrate "How it works"; `lifestyle-couch` is the mission photo.
+
+- [ ] These images show the final tub and label. Reshoot if the packaging changes before launch.
 
 ## 5. Reviews
 
