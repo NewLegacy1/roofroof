@@ -16,7 +16,6 @@ This storefront was adapted from the Skitter template. Everything below is still
 ## 1b. Vet endorsement
 
 - [x] Dr. Levi Cohen is a real US veterinarian (confirmed by the owner).
-- [ ] The page currently shows the placeholder name **Dr. Epry Jeffstein** on Dr. Cohen's photo. Before launch, the name must match the vet in the photo who approved the quote.
 - [ ] Keep his written approval of the exact quote and photo on file. Keep the "Vet Consultant to Ruffora" disclosure, since FTC endorsement rules require disclosing the relationship.
 - [ ] His quote mentions **skin**. Nothing else on the page makes a skin claim, and none of the listed ingredients is described as supporting skin. Get this backed by evidence or ask him to reword it.
 
