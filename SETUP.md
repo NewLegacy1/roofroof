@@ -22,12 +22,13 @@ This storefront was adapted from the Skitter template. Everything below is still
 
 ## 2. Shopify
 
-- [ ] Create the product with three variants priced **$39.99 / $64.99 / $79.98** (1, 2, 3 tubs).
+- [ ] Create the product with three variants priced **$33.99 / $55.24 / $67.98** (1, 2, 3 tubs). These are the monthly prices customers pay.
+- [ ] Turn on **Sell only as a subscription** for the product so it can't be bought one-time from the Shopify storefront either.
 - [ ] Paste the variant IDs into `site/catalog.js`. Checkout refuses any pack left blank.
-- [ ] Create a monthly selling plan at **15% off**. That produces $33.99 / $55.24 / $67.98, which the tests check.
+- [ ] Create a monthly selling plan with **no discount** (the variant price is the subscription price). Its ID goes in `SHOPIFY_SELLING_PLAN_ID`; checkout refuses orders without it.
 - [ ] Storefront API token → `SHOPIFY_STOREFRONT_TOKEN`; store domain → `SHOPIFY_STORE_DOMAIN`; selling plan GID → `SHOPIFY_SELLING_PLAN_ID` (see `.env.example`).
 - [ ] Store name "Ruffora", logo, checkout colours (evergreen `#153E38`, ivory background).
-- [ ] Shipping profile. Then set `SHIP_ONE_TIME` / `SUBSCRIPTION_FREE_SHIP` in `site/index.html` and `ONE_TIME_SHIPPING_USD` / `SUBSCRIPTION_FREE_SHIPPING` in `scripts/build-pages.js`, and run `npm run pages`. Until then the site says shipping is calculated at checkout.
+- [ ] Shipping profile. If subscriptions ship free, set `FREE_SHIPPING` in `site/index.html` and `scripts/build-pages.js`, then run `npm run pages`. Until then the site says shipping is calculated at checkout.
 - [ ] Generate Shopify's privacy policy for Ruffora (Settings > Policies) and compare it with `launch/policies/privacy.html`.
 - [ ] Paste the refund, shipping, terms, contact and subscription bodies from `launch/policies/` into Settings > Policies.
 - [ ] Add the email inserts in `launch/emails/` (see its README).
@@ -66,4 +67,4 @@ There is deliberately no reviews section. Add one only with genuine customer rev
 
 - [ ] New Vercel project from this folder (output directory `site`, from `vercel.json`); add the environment variables.
 - [ ] Optional: Meta pixel ID → `META_PIXEL_ID`. Verify PageView/ViewContent/AddToCart/InitiateCheckout in Test Events, then a Purchase after a test order.
-- [ ] Place a one-time order and a subscription test order: prices, shipping, taxes, emails, skip/cancel in the customer account, and a refund.
+- [ ] Place a test subscription order for each supply (1, 2 and 3 tubs): prices, shipping, taxes, emails, skip/cancel in the customer account, and a refund.

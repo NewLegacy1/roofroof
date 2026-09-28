@@ -70,8 +70,6 @@ async function storefrontGraphql(query, variables, ip) {
 
 function resolveLine(body) {
   const packId = Number(body.pack);
-  if (typeof body.subscribe !== 'boolean') throw new Error('Choose a valid purchase option.');
-  const subscribe = body.subscribe;
   if (![1, 2, 3].includes(packId)) {
     throw new Error("Choose a valid pack.");
   }
@@ -81,14 +79,11 @@ function resolveLine(body) {
     throw new Error("This pack is not configured. Please contact us.");
   }
 
-  if (subscribe) {
-    if (!SELLING_PLAN_ID) {
-      throw new Error("Subscribe & Save is not configured yet. Please choose a one-time purchase.");
-    }
-    return { merchandiseId: offer.variantGid, quantity: 1, sellingPlanId: SELLING_PLAN_ID };
+  // Daily Gut is sold by subscription only, so every cart line carries the monthly selling plan.
+  if (!SELLING_PLAN_ID) {
+    throw new Error("Subscriptions are not configured yet. Please contact us.");
   }
-
-  return { merchandiseId: offer.variantGid, quantity: 1 };
+  return { merchandiseId: offer.variantGid, quantity: 1, sellingPlanId: SELLING_PLAN_ID };
 }
 
 module.exports = async function handler(req, res) {
