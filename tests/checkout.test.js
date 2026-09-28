@@ -21,7 +21,7 @@ function response() {
 }
 
 test('catalog prices match the Ruffora monthly offer table', () => {
-  assert.deepEqual(offers.map(o => [o.tubs, o.price]), [[1, 33.99], [2, 55.24], [3, 67.98]]);
+  assert.deepEqual(offers.map(o => [o.tubs, o.price]), [[1, 34], [2, 55], [3, 68]]);
   // Buy 2, Get 1 Free: three tubs cost the same as two single-tub subscriptions.
   assert.equal(offers[2].price, Math.round(offers[0].price * 2 * 100) / 100);
 });

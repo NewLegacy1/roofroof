@@ -22,7 +22,7 @@ This storefront was adapted from the Skitter template. Everything below is still
 
 ## 2. Shopify
 
-- [ ] Create the product with three variants priced **$33.99 / $55.24 / $67.98** (1, 2, 3 tubs). These are the monthly prices customers pay.
+- [ ] Create the product with three variants priced **$34 / $55 / $68** (1, 2, 3 tubs). These are the monthly prices customers pay.
 - [ ] Turn on **Sell only as a subscription** for the product so it can't be bought one-time from the Shopify storefront either.
 - [ ] Paste the variant IDs into `site/catalog.js`. Checkout refuses any pack left blank.
 - [ ] Create a monthly selling plan with **no discount** (the variant price is the subscription price). Its ID goes in `SHOPIFY_SELLING_PLAN_ID`; checkout refuses orders without it.

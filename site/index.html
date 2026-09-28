@@ -677,7 +677,7 @@ const {offers:OFFERS, product:PRODUCT}=window.RUFFORA;
 const FREE_SHIPPING=false; // true once the subscription shipping profile is free
 const state={pack:2};
 const $=id=>document.getElementById(id);
-const money=n=>"$"+n.toFixed(2);
+const money=n=>"$"+(Number.isInteger(n)?n:n.toFixed(2)); // whole-dollar prices show without cents
 const priceOf=o=>o.price;
 const perDay=o=>money(o.price/30);
 const tubsTxt=o=>`${o.tubs} tub${o.tubs>1?"s":""}`;
