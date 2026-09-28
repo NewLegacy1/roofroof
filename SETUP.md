@@ -34,10 +34,17 @@ This storefront was adapted from the Skitter template. Everything below is still
 - [ ] Add the email inserts in `launch/emails/` (see its README).
 - [ ] Theme: add `launch/shopify-home-redirect.liquid` so the Shopify storefront home sends people to the landing page.
 
+## 2b. No customer login
+
+Customers never sign in: subscriptions are skipped, changed or cancelled by email.
+- [ ] Shopify admin > Settings > Customer accounts: turn off sign-in links in the online store and at checkout.
+- [ ] Decide who handles subscription emails and how fast. Cancel requests should be done before the next renewal charges.
+- [ ] Check auto-renewal rules for the states you sell to. Some (e.g. California) require online sign-ups to be cancellable online without extra steps; a pre-filled "cancel" email link may not be enough everywhere.
+
 ## 3. Business details
 
 - [ ] Domain and inbox. The site uses **ruffora.com** and **hello@ruffora.com** as placeholders. Replace them everywhere if different (`site/index.html`, `scripts/build-pages.js`, `launch/`), then run `npm run pages`.
-- [ ] `ACCOUNT_URL`, `CHECKOUT_DOMAIN` and `POSTAL_ADDRESS` in `scripts/build-pages.js`; `REPLACE_WITH_SHOP_ID` in `launch/emails/`.
+- [ ] `CHECKOUT_DOMAIN` and `POSTAL_ADDRESS` in `scripts/build-pages.js`.
 - [ ] Confirm the 30-day money-back guarantee (including opened tubs) is a promise you want to make. It appears on the page, in the refund policy and in emails.
 - [ ] Email authentication (SPF, DKIM, DMARC) for the sending domain.
 
@@ -67,4 +74,4 @@ There is deliberately no reviews section. Add one only with genuine customer rev
 
 - [ ] New Vercel project from this folder (output directory `site`, from `vercel.json`); add the environment variables.
 - [ ] Optional: Meta pixel ID → `META_PIXEL_ID`. Verify PageView/ViewContent/AddToCart/InitiateCheckout in Test Events, then a Purchase after a test order.
-- [ ] Place a test subscription order for each supply (1, 2 and 3 tubs): prices, shipping, taxes, emails, skip/cancel in the customer account, and a refund.
+- [ ] Place a test subscription order for each supply (1, 2 and 3 tubs): prices, shipping, taxes, emails, skip/cancel by email, and a refund.
