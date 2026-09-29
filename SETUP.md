@@ -42,7 +42,7 @@ Customers never sign in: subscriptions are skipped, changed or cancelled by emai
 
 ## 3. Business details
 
-- [ ] Domain and inbox. The site uses **ruffora.com** and **hello@ruffora.com** as placeholders. Replace them everywhere if different (`site/index.html`, `scripts/build-pages.js`, `launch/`), then run `npm run pages`.
+- [ ] Domain and inbox. The site uses **ruffora.shop** and **support@ruffora.shop** as placeholders. Replace them everywhere if different (`site/index.html`, `scripts/build-pages.js`, `launch/`), then run `npm run pages`.
 - [ ] `CHECKOUT_DOMAIN` and `POSTAL_ADDRESS` in `scripts/build-pages.js`.
 - [ ] Confirm the 30-day money-back guarantee (including opened tubs) is a promise you want to make. It appears on the page, in the refund policy and in emails.
 - [ ] Email authentication (SPF, DKIM, DMARC) for the sending domain.

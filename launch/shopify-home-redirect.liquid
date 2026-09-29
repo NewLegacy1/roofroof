@@ -1,7 +1,7 @@
 {% if request.page_type == 'index' %}
 <script>
   (function () {
-    var target = new URL('https://ruffora.com/');
+    var target = new URL('https://ruffora.shop/');
     var current = new URL(window.location.href);
     ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id'].forEach(function (key) {
       if (current.searchParams.has(key)) target.searchParams.set(key, current.searchParams.get(key));
@@ -9,5 +9,5 @@
     window.location.replace(target.href);
   }());
 </script>
-<noscript><meta http-equiv="refresh" content="0;url=https://ruffora.com/"></noscript>
+<noscript><meta http-equiv="refresh" content="0;url=https://ruffora.shop/"></noscript>
 {% endif %}

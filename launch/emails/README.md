@@ -1,6 +1,6 @@
 # Ruffora email copy and setup
 
-Use Shopify's existing transactional templates with the Ruffora logo (`site/assets/logo-wordmark.png`, 240px wide), accent colour evergreen `#153E38`, and `hello@ruffora.com` as sender/reply-to. Keep the native order items, totals, payment status, tracking links, delivery exceptions and subscription information.
+Use Shopify's existing transactional templates with the Ruffora logo (`site/assets/logo-wordmark.png`, 240px wide), accent colour evergreen `#153E38`, and `support@ruffora.shop` as sender/reply-to. Keep the native order items, totals, payment status, tracking links, delivery exceptions and subscription information.
 
 The `.liquid` files here are **short insert blocks**, not replacement templates. Paste each one after the native introductory message. Do not paste them over a complete Shopify template or insert them twice.
 
