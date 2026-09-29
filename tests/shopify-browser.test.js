@@ -8,8 +8,8 @@ function browser(tokens = { uniqueToken:'shopify-visitor', visitToken:'shopify-v
   const context = {
     window:{}, location:{href:'https://ruffora.shop/'}, document:{referrer:'https://example.com/ad'},
     console:{warn(){}}, setTimeout,
-    fetch:async (url, init) => { requests.push(JSON.parse(init.body)); return {ok:true,json:async()=>({shopId:'gid://shopify/Shop/123',storefrontId:'1000181287'})}; },
-    getTrackingValues:()=>tokens,
+    fetch:async (url, init) => { requests.push(JSON.parse(init.body)); return {ok:true,json:async()=>({shopId:'gid://shopify/Shop/123',storefrontId:'1000181287',tracking:tokens})}; },
+    getTrackingValues:()=>({}),
     getClientBrowserParameters:()=>({...tokens,url:'https://ruffora.shop/',path:'/',referrer:'https://example.com/ad'}),
     sendShopifyAnalytics:async event=>events.push(event),
   };
@@ -40,3 +40,4 @@ test('missing Shopify identity fails instead of fabricating a session',async()=>
   await assert.rejects(api.consent(true),/did not issue/);
   assert.equal(events.length,0);
 });
+

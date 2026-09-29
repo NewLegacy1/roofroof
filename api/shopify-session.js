@@ -39,7 +39,13 @@ module.exports = async function handler(req, res) {
     const data = await response.json();
     if (!response.ok || data.errors || !data.data?.shop?.id) return reply(502, { error: 'Shopify session setup failed' });
     forwardTracking(response, res);
-    return reply(200, { shopId: data.data.shop.id, storefrontId: hydrogen.storefrontId });
+    // Return Shopify-issued identifiers explicitly: Resource Timing entries can
+    // be unavailable or not yet populated when fetch resolves in the browser.
+    const timing = response.headers.get('server-timing') || '';
+    const uniqueToken = timing.match(/(?:^|,)\s*_y;desc="([\w-]+)"/)?.[1] || '';
+    const visitToken = timing.match(/(?:^|,)\s*_s;desc="([\w-]+)"/)?.[1] || '';
+    return reply(200, { shopId: data.data.shop.id, storefrontId: hydrogen.storefrontId,
+      tracking: consent ? { uniqueToken, visitToken } : {} });
   } catch {
     return reply(502, { error: 'Shopify session setup failed' });
   }
