@@ -694,7 +694,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 <div class="sticky" id="sticky" aria-hidden="true">
   <div class="row">
     <div class="sel"><b id="st-name"></b><span id="st-price"></span></div>
-    <a class="btn" href="#shop" id="st-btn" tabindex="-1">Subscribe</a>
+    <a class="btn" href="#shop" id="st-btn" tabindex="-1">Add to cart</a>
   </div>
 </div>
 <div class="toast" id="toast" role="status"></div>
@@ -728,7 +728,7 @@ function renderPacks(){
 }
 function update(){
   const o=OFFERS.find(x=>x.id===state.pack), now=priceOf(o);
-  $("cta").textContent=`Start subscription · ${money(now)}/mo`;
+  $("cta").textContent=`Add to cart · ${money(now)}/mo`;
   $("terms").textContent=`${tubsTxt(o)} every month · ${shipTxt()} · Skip or cancel anytime`;
   const off=Math.round((1-now/o.compareAt)*100);
   $("deal-badge").textContent=PACK_DEAL[o.id]||(off>0?`Save ${off}%`:"");
