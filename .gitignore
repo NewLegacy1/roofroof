@@ -11,3 +11,6 @@ preview/
 
 # Local Evolve skills (machine-specific, not for the public repo)
 .claude/skills/
+
+.vercel
+.env*

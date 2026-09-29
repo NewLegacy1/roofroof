@@ -147,6 +147,13 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .dog-size p{font-size:14px;font-weight:700;color:var(--ink)}
 .size-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .size-opts button{min-height:52px;padding:6px 4px;border:1.5px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);font:800 14px/1.2 var(--ui);cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
+.dg{display:flex;align-items:flex-end;justify-content:center;flex:none}
+.dg img{display:block;width:auto;max-width:none}
+.dg-s img{height:36px}.dg-m img{height:48px}.dg-l img{height:60px}
+.size-opts button .dg{height:60px;margin:2px auto 6px}
+.serve-row .who{display:flex;align-items:center;gap:14px}
+.serve-row .who .dg{width:64px;height:44px}
+.serve-row .who .dg-s img{height:26px}.serve-row .who .dg-m img{height:34px}.serve-row .who .dg-l img{height:44px}
 .size-opts button small{display:block;font-size:11px;font-weight:600;color:var(--soft);margin-top:2px}
 .size-opts button:hover{border-color:var(--sage)}
 .size-opts button[aria-pressed="true"]{background:var(--sage-bg);border-color:var(--green);box-shadow:0 3px 0 var(--green);color:var(--green)}
@@ -433,9 +440,9 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
       <div class="dog-size">
         <p id="size-label">Choose dog size:</p>
         <div class="size-opts" id="size-opts" role="group" aria-labelledby="size-label">
-          <button type="button" data-pack="1" aria-pressed="false">Under 11 kg<small>under 25 lb</small></button>
-          <button type="button" data-pack="2" aria-pressed="false">11 - 34 kg<small>25–75 lb</small></button>
-          <button type="button" data-pack="3" aria-pressed="false">Over 34 kg<small>over 75 lb</small></button>
+          <button type="button" data-pack="1" aria-pressed="false"><span class="dg dg-s"><img src="/assets/dogs/dog-small.webp" alt="" width="720" height="659" loading="lazy" decoding="async"></span>Under 25 lb<small>e.g. Yorkie</small></button>
+          <button type="button" data-pack="2" aria-pressed="false"><span class="dg dg-m"><img src="/assets/dogs/dog-medium.webp" alt="" width="720" height="602" loading="lazy" decoding="async"></span>25–75 lb<small>e.g. Labradoodle</small></button>
+          <button type="button" data-pack="3" aria-pressed="false"><span class="dg dg-l"><img src="/assets/dogs/dog-large.webp" alt="" width="720" height="667" loading="lazy" decoding="async"></span>75+ lb<small>e.g. Cane Corso</small></button>
         </div>
       </div>
 
@@ -477,9 +484,9 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
         <details><summary><svg class="i"><use href="#paw"/></svg><span>Which supply is right for me?</span></summary><div class="body">
           <p>Each tub has <b>30 soft chews</b>. Bigger dogs get more chews a day, so we match the supply to your dog and every size lasts <b>about a month</b>.</p>
           <div class="need">
-            <div><span>Under 11 kg · 1 chew a day</span><span>1 tub</span></div>
-            <div class="rec"><span>11 – 34 kg · 2 chews a day</span><span>2 tubs</span></div>
-            <div><span>Over 34 kg · 3 chews a day</span><span>3 tubs</span></div>
+            <div><span>Under 25 lb · 1 chew a day</span><span>1 tub</span></div>
+            <div class="rec"><span>25 – 75 lb · 2 chews a day</span><span>2 tubs</span></div>
+            <div><span>Over 75 lb · 3 chews a day</span><span>3 tubs</span></div>
           </div>
         </div></details>
         <details><summary><svg class="i"><use href="#leaf"/></svg><span>What's inside</span></summary><div class="body">
@@ -557,9 +564,9 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
     <div class="sec-head"><div class="eyebrow">Serving guide</div><h2>How much for your dog?</h2><p>Pick your dog's size. Every suggested supply lasts about a month.</p></div>
     <div class="serve" id="serve" role="group" aria-label="Dog size">
       <div class="serve-head"><span>Dog size</span><span>Daily</span></div>
-      <button type="button" class="serve-row" data-pack="1" aria-pressed="false"><span><b>Small</b><small>Under 11 kg</small></span><span class="dose"><i aria-hidden="true"><span class="chew"></span></i>1 soft chew</span></button>
-      <button type="button" class="serve-row" data-pack="2" aria-pressed="false"><span><b>Medium</b><small>11 – 34 kg</small></span><span class="dose"><i aria-hidden="true"><span class="chew"></span><span class="chew"></span></i>2 soft chews</span></button>
-      <button type="button" class="serve-row" data-pack="3" aria-pressed="false"><span><b>Large</b><small>Over 34 kg</small></span><span class="dose"><i aria-hidden="true"><span class="chew"></span><span class="chew"></span><span class="chew"></span></i>3 soft chews</span></button>
+      <button type="button" class="serve-row" data-pack="1" aria-pressed="false"><span class="who"><span class="dg dg-s"><img src="/assets/dogs/dog-small.webp" alt="" width="720" height="659" loading="lazy" decoding="async"></span><span><b>Small</b><small>Under 25 lb</small><small>e.g. Yorkie</small></span></span><span class="dose"><i aria-hidden="true"><span class="chew"></span></i>1 soft chew</span></button>
+      <button type="button" class="serve-row" data-pack="2" aria-pressed="false"><span class="who"><span class="dg dg-m"><img src="/assets/dogs/dog-medium.webp" alt="" width="720" height="602" loading="lazy" decoding="async"></span><span><b>Medium</b><small>25 – 75 lb</small><small>e.g. Labradoodle</small></span></span><span class="dose"><i aria-hidden="true"><span class="chew"></span><span class="chew"></span></i>2 soft chews</span></button>
+      <button type="button" class="serve-row" data-pack="3" aria-pressed="false"><span class="who"><span class="dg dg-l"><img src="/assets/dogs/dog-large.webp" alt="" width="720" height="667" loading="lazy" decoding="async"></span><span><b>Large</b><small>Over 75 lb</small><small>e.g. Cane Corso</small></span></span><span class="dose"><i aria-hidden="true"><span class="chew"></span><span class="chew"></span><span class="chew"></span></i>3 soft chews</span></button>
       <div class="serve-foot" aria-live="polite"><p id="serve-suggest"></p><a href="#shop">Shop this supply</a></div>
     </div>
     <p class="serve-note">Offer by hand or with food, at about the same time each day. Check with your vet before starting a supplement if your dog is pregnant, nursing, on medication or has a health condition.</p>
@@ -686,7 +693,7 @@ const priceOf=o=>o.price;
 const perDay=o=>money(o.price/30);
 const tubsTxt=o=>`${o.tubs} tub${o.tubs>1?"s":""}`;
 /* Suggested supply by dog size; the size buttons pick the matching pack. */
-const PACK_FIT={1:"30-day supply · dogs under 11 kg",2:"30-day supply · dogs 11 – 34 kg",3:"30-day supply · dogs over 34 kg"};
+const PACK_FIT={1:"30-day supply · dogs under 25 lb",2:"30-day supply · dogs 25 – 75 lb",3:"30-day supply · dogs over 75 lb"};
 const PACK_DEAL={3:"3rd tub free"};
 const shipTxt=()=>FREE_SHIPPING?"Free shipping":"Shipping calculated at checkout";
 
