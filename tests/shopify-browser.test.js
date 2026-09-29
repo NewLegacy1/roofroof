@@ -8,7 +8,7 @@ function browser(tokens = { uniqueToken:'shopify-visitor', visitToken:'shopify-v
   const context = {
     window:{}, location:{href:'https://ruffora.shop/'}, document:{referrer:'https://example.com/ad'},
     console:{warn(){}}, setTimeout,
-    fetch:async (url, init) => { requests.push(JSON.parse(init.body)); return {ok:true,json:async()=>({shopId:'gid://shopify/Shop/123'})}; },
+    fetch:async (url, init) => { requests.push(JSON.parse(init.body)); return {ok:true,json:async()=>({shopId:'gid://shopify/Shop/123',storefrontId:'1000181287'})}; },
     getTrackingValues:()=>tokens,
     getClientBrowserParameters:()=>({...tokens,url:'https://ruffora.shop/',path:'/',referrer:'https://example.com/ad'}),
     sendShopifyAnalytics:async event=>events.push(event),
@@ -22,6 +22,8 @@ test('consented landing-page visit is sent once before any checkout, with Shopif
   await api.consent(true);
   assert.equal(events.length,1);
   assert.equal(events[0].eventName,'PAGE_VIEW');
+  assert.equal(events[0].payload.shopifySalesChannel,'hydrogen');
+  assert.equal(events[0].payload.storefrontId,'1000181287');
   assert.equal(events[0].payload.url,'https://ruffora.shop/');
   assert.equal(events[0].payload.visitToken,'shopify-visit');
   assert.equal(requests[0].referrer,'https://example.com/ad');

@@ -1,4 +1,5 @@
 const { trackingHeaders, forwardTracking } = require('../lib/shopify-tracking');
+const hydrogen = require('../lib/hydrogen-config');
 
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -8,8 +9,8 @@ module.exports = async function handler(req, res) {
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     if (typeof body?.consent !== 'boolean') return reply(400, { error: 'Consent required' });
-    const domain = (process.env.SHOPIFY_STORE_DOMAIN || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
-    if (!/^[a-z0-9-]+\.myshopify\.com$/i.test(domain) || !process.env.SHOPIFY_STOREFRONT_TOKEN) {
+    const domain = hydrogen.domain;
+    if (!/^[a-z0-9-]+\.myshopify\.com$/i.test(domain) || !hydrogen.publicToken) {
       return reply(503, { error: 'Shopify is not configured' });
     }
     const consent = body.consent && req.headers['sec-gpc'] !== '1';
@@ -28,7 +29,8 @@ module.exports = async function handler(req, res) {
       headers: {
         ...trackingHeaders(req),
         'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_STOREFRONT_TOKEN,
+        'X-Shopify-Storefront-Access-Token': hydrogen.publicToken,
+        'Shopify-Storefront-Id': hydrogen.storefrontId,
         'Shopify-Storefront-Buyer-IP': (req.headers['x-forwarded-for'] || '').split(',')[0].trim(),
       },
       body: JSON.stringify({ query }),
@@ -37,7 +39,7 @@ module.exports = async function handler(req, res) {
     const data = await response.json();
     if (!response.ok || data.errors || !data.data?.shop?.id) return reply(502, { error: 'Shopify session setup failed' });
     forwardTracking(response, res);
-    return reply(200, { shopId: data.data.shop.id });
+    return reply(200, { shopId: data.data.shop.id, storefrontId: hydrogen.storefrontId });
   } catch {
     return reply(502, { error: 'Shopify session setup failed' });
   }

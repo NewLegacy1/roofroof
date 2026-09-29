@@ -29,7 +29,9 @@ test('session setup passes explicit consent and preserves Shopify visitor identi
       let sent;
       global.fetch = async (url, options) => {
         sent = options;
-        assert.equal(url, 'https://example.myshopify.com/api/unstable/graphql.json');
+        assert.equal(url, 'https://ng7vb0-ew.myshopify.com/api/unstable/graphql.json');
+        assert.equal(options.headers['Shopify-Storefront-Id'], '1000181287');
+        assert.equal(options.headers['X-Shopify-Storefront-Access-Token'], require('../lib/hydrogen-config').publicToken);
         return { ok: true, headers: new Headers({'server-timing':'_s;desc="shopify-visit"'}), json:async()=>({data:{shop:{id:'gid://shopify/Shop/123'}}}) };
       };
       const res = response();
@@ -39,6 +41,7 @@ test('session setup passes explicit consent and preserves Shopify visitor identi
       assert.equal(sent.headers.Cookie, '_shopify_analytics=existing');
       assert.match(JSON.parse(sent.body).query, new RegExp(`analytics: ${expected}`));
       assert.equal(res.body.shopId, 'gid://shopify/Shop/123');
+      assert.equal(res.body.storefrontId, '1000181287');
       assert.equal(JSON.stringify(res.body).includes('test-public-token'), false);
     }
   } finally { global.fetch = original; }

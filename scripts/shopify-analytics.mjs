@@ -16,7 +16,8 @@ window.RufforaShopify = {
         body: JSON.stringify({ consent: granted, url: location.href, referrer: document.referrer }),
       });
       if (!response.ok) throw new Error('Shopify session setup failed');
-      shopId = (await response.json()).shopId;
+      const session = await response.json();
+      shopId = session.shopId;
       // Reading after the body completes makes Server-Timing available to the SDK.
       const { uniqueToken, visitToken } = getTrackingValues();
       if (!granted || !permitted || pageSent) return;
@@ -26,7 +27,8 @@ window.RufforaShopify = {
       await sendShopifyAnalytics({ eventName: 'PAGE_VIEW', payload: {
         ...getClientBrowserParameters(), shopId, hasUserConsent: true,
         analyticsAllowed: true, marketingAllowed: true, saleOfDataAllowed: true,
-        shopifySalesChannel: 'headless', currency: 'USD', acceptedLanguage: 'en', pageType: 'index',
+        shopifySalesChannel: 'hydrogen', storefrontId: session.storefrontId,
+        currency: 'USD', acceptedLanguage: 'en', pageType: 'index',
       } });
       pageSent = true;
     });
