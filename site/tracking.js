@@ -76,7 +76,8 @@
       if (!initialized || !allowed() || !data.analytics) return;
       const details = { currency: data.analytics.currency, value: data.analytics.value, content_type: 'product', content_ids: [data.analytics.variantId], contents: [{ id: data.analytics.variantId, quantity: 1 }], num_items: 1 };
       window.fbq('track', 'AddToCart', details, { eventID: data.analytics.eventId + '-cart' });
-      window.fbq('track', 'InitiateCheckout', details, { eventID: data.analytics.eventId + '-checkout' });
+      // Shopify's Meta integration sends InitiateCheckout after the redirect.
+      // Sending it here as well counts the same checkout twice.
     },
   };
   document.getElementById('privacy-settings')?.addEventListener('click', showChoices);
