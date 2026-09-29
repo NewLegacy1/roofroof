@@ -1,6 +1,7 @@
 const { pack } = require("../lib/catalog");
 const { cleanAttribution, CAMPAIGN_KEYS } = require('../lib/attribution');
 const { randomUUID } = require('node:crypto');
+const { trackingHeaders, forwardTracking } = require('../lib/shopify-tracking');
 
 const API_VERSION = "2026-07";
 const CHECKOUT_HOST = process.env.SHOPIFY_CHECKOUT_HOST || "";
@@ -40,7 +41,7 @@ function checkoutUrl(raw, attribution) {
   return url.toString();
 }
 
-async function storefrontGraphql(query, variables, ip) {
+async function storefrontGraphql(query, variables, ip, req, res) {
   const domain = shopDomain();
   const token = storefrontToken();
   if (!domain || !token) {
@@ -48,6 +49,7 @@ async function storefrontGraphql(query, variables, ip) {
   }
 
   const headers = {
+    ...trackingHeaders(req),
     "Content-Type": "application/json",
     "X-Shopify-Storefront-Access-Token": token,
   };
@@ -65,6 +67,7 @@ async function storefrontGraphql(query, variables, ip) {
     const message = payload.errors?.[0]?.message || "Shopify request failed.";
     throw new Error(message);
   }
+  forwardTracking(response, res);
   return payload.data;
 }
 
@@ -87,6 +90,7 @@ function resolveLine(body) {
 }
 
 module.exports = async function handler(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
   if (req.method === "OPTIONS") {
     res.statusCode = 204;
     res.end();
@@ -128,6 +132,8 @@ module.exports = async function handler(req, res) {
         },
       },
       buyerIp(req),
+      req,
+      res,
     );
 
     const error = data.cartCreate?.userErrors?.[0]?.message;

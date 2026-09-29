@@ -71,6 +71,9 @@ There is deliberately no reviews section. Add one only with genuine customer rev
 
 ## 6. Deploy and test
 
+- [ ] Shopify landing-page sessions: deployment runs `npm run build` to bundle Shopify's official analytics SDK. `/api/shopify-session` uses the existing Storefront credentials to obtain Shopify-issued tracking cookies and identity; no new token is exposed to the browser. After consent, the landing page sends a Shopify page view independently of Meta. Cart creation forwards the same identity and cookies to Shopify.
+- [ ] Verify a fresh consented visit to `ruffora.shop` appears in Shopify analytics **before clicking checkout**, then verify checkout belongs to that visit. Check the Headless sales-channel reporting/filter as well as Live View. A successful analytics network request alone does not prove Shopify reported a session. Verify denial sends no page analytics. This custom storefront integration follows Shopify's custom-headless migration guidance, which Shopify labels as not officially supported: https://shopify.dev/docs/storefronts/headless/hydrogen/migrate/cookies-custom-setup .
+
 - [ ] New Vercel project from this folder (output directory `site`, from `vercel.json`); add the environment variables.
 - [ ] Optional: Meta pixel ID → `META_PIXEL_ID`. Verify PageView/ViewContent/AddToCart/InitiateCheckout in Test Events, then a Purchase after a test order.
 - [ ] Place a test subscription order for each supply (1, 2 and 3 tubs): prices, shipping, taxes, emails, skip/cancel by email, and a refund.

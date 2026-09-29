@@ -21,6 +21,7 @@
 <meta name="twitter:image" content="https://ruffora.shop/assets/ruffora-social-share.png">
 <meta name="theme-color" content="#153E38">
 <script src="/catalog.js"></script>
+<script src="/shopify-analytics.js" defer></script>
 <script src="/tracking.js" defer></script>
 <link rel="icon" type="image/png" href="/assets/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -773,7 +774,8 @@ async function goToCheckout(){
   const prevText=btn.textContent;
   btn.textContent="Loading checkout…";
   try{
-    const r=await fetch("/api/checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pack:state.pack,attribution:window.RufforaTracking?.attribution()||{}})});
+    const shopifyHeaders=await window.RufforaShopify?.headers()||{};
+    const r=await fetch("/api/checkout",{method:"POST",headers:{"Content-Type":"application/json",...shopifyHeaders},body:JSON.stringify({pack:state.pack,attribution:window.RufforaTracking?.attribution()||{}})});
     const data=await r.json();
     if(!r.ok||!data.ok||!data.checkoutUrl){toast(data.message||"Could not start checkout.");btn.disabled=false;btn.textContent=prevText;return}
     if(window.RufforaTracking){

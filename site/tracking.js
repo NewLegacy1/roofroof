@@ -34,6 +34,7 @@
   function choose(value) {
     choice = value;
     storage.set('ruffora-marketing-consent', value);
+    window.RufforaShopify?.consent(allowed()).catch(() => {});
     if (banner) banner.remove();
     if (allowed()) pixel();
     else if (initialized) window.fbq('consent', 'revoke');
@@ -81,6 +82,9 @@
     },
   };
   document.getElementById('privacy-settings')?.addEventListener('click', showChoices);
+  // Shopify sessions are independent of whether a Meta pixel is configured.
+  if (choice) window.RufforaShopify?.consent(allowed()).catch(() => {});
+  else showChoices();
   fetch('/api/public-config').then(response => response.json()).then(config => {
     if (!/^\d+$/.test(config.metaPixelId || '')) return;
     pixelId = config.metaPixelId;

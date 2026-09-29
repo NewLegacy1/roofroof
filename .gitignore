@@ -2,6 +2,8 @@
 .env.*
 !.env.example
 node_modules/
+work/
+site/shopify-analytics.js
 .vercel
 
 .vercel

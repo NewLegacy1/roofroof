@@ -2,9 +2,18 @@
   "name": "ruffora",
   "private": true,
   "scripts": {
-    "test": "node --test tests/checkout.test.js",
+    "test": "node --test tests/*.test.js",
+    "build": "esbuild scripts/shopify-analytics.mjs --bundle --minify --format=iife --platform=browser --outfile=site/shopify-analytics.js",
     "pages": "node scripts/build-pages.js",
     "dev": "node scripts/serve.js 8080"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@shopify/hydrogen-react": "2026.4.4"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
 }
