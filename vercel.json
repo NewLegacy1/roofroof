@@ -1,3 +1,7 @@
 {
-  "outputDirectory": "site"
+  "outputDirectory": "site",
+  "redirects": [
+    { "source": "/privacy", "destination": "https://checkout.shopify.com/74630889539/policies/41467019331.html?locale=en", "permanent": false },
+    { "source": "/privacy/", "destination": "https://checkout.shopify.com/74630889539/policies/41467019331.html?locale=en", "permanent": false }
+  ]
 }

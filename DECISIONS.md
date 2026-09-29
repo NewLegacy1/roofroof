@@ -86,3 +86,14 @@ The Shopify connector in this session is linked to a store named **aerase** (che
 | One-time purchase | Owner: not a concern because nobody can reach it (site checkout always adds the plan) | Accepted risk: Shopify's own product URL remains buyable one-time; home redirect covers only the homepage. |
 | PO boxes / ship-from | Not a concern; supplier ships | Owner. |
 | Legal policies, notification templates, live theme, checkout branding | Cannot be written through the connector (missing scope / Plus-only) | Manual steps in SHOPIFY_MANUAL_STEPS.md. |
+
+## 2026-09-29 (Vercel + domain)
+
+| Topic | Decision | Reason / status |
+| --- | --- | --- |
+| Vercel project | "ruffora" in scope new-legacys-projects (prj_9ljGnE16w7qYIB9WH2Is8w76Hf5g), linked to GitHub NewLegacy1/roofroof (main), output dir site | Created with CLI (MCP lacked scope). Repo is named "roofroof". |
+| Env vars | SHOPIFY_STORE_DOMAIN, SHOPIFY_STOREFRONT_TOKEN (sensitive), SHOPIFY_SELLING_PLAN_ID set for Production + Preview. SHOPIFY_CHECKOUT_HOST unset (Shopify already returns checkout.ruffora.shop). META_PIXEL_ID unset. | Owner. |
+| Domains | ruffora.shop and www.ruffora.shop added to the project. DNS at Namecheap (owner configured); ruffora.shop resolves to 76.76.21.21; checkout. and account. resolve to Shopify. | Verified with nslookup. |
+| Deploy | Production deploy Ready. https://ruffora.shop/ = 200; /api/checkout for packs 1, 2, 3 returns checkout.ruffora.shop URLs. | Verified by curl. SITE IS PUBLIC now. |
+| Email | support@ruffora.shop inbox on Google Workspace, authenticated by owner | Owner. |
+| Privacy policy | /privacy on the site redirects (vercel.json, temporary 307) to Shopify's generated privacy policy | Owner: use Shopify's until a mailing address exists. Then restore our own launch/policies/privacy.html. |
