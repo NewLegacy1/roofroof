@@ -11,13 +11,13 @@ test('only Shopify cookies and valid session tokens reach Shopify', () => {
     'x-shopify-visittoken': 'visit-token', 'x-shopify-uniquetoken': 'bad\r\nvalue',
   }}), { Cookie: '_shopify_analytics=issued; _tracking_consent=consent', 'x-shopify-visittoken': 'visit-token' });
 });
-test('Shopify-issued cookies and timing are forwarded without foreign cookie domains', () => {
+test('Shopify-issued cookies and timing are shared with the checkout subdomain', () => {
   const res = response();
   forwardTracking({headers: {
     getSetCookie: () => ['_shopify_analytics=issued; Domain=example.myshopify.com; Path=/; Secure; HttpOnly', 'unrelated=no'],
     get: () => '_y;desc="visitor", _s;desc="visit", _cmp;desc="consent"',
-  }}, res);
-  assert.deepEqual(res.headers['Set-Cookie'], ['_shopify_analytics=issued; Path=/; Secure; HttpOnly']);
+  }}, res, '.ruffora.shop');
+  assert.deepEqual(res.headers['Set-Cookie'], ['_shopify_analytics=issued; Path=/; Secure; HttpOnly; Domain=.ruffora.shop']);
   assert.match(res.headers['Server-Timing'], /visitor/);
 });
 test('session setup passes explicit consent and preserves Shopify visitor identity', async () => {

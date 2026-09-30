@@ -38,7 +38,9 @@ module.exports = async function handler(req, res) {
     });
     const data = await response.json();
     if (!response.ok || data.errors || !data.data?.shop?.id) return reply(502, { error: 'Shopify session setup failed' });
-    forwardTracking(response, res);
+    const hostname = (req.headers.host || '').split(':')[0].toLowerCase();
+    const cookieDomain = hostname === 'ruffora.shop' || hostname.endsWith('.ruffora.shop') ? '.ruffora.shop' : null;
+    forwardTracking(response, res, cookieDomain);
     // Return Shopify-issued identifiers explicitly: Resource Timing entries can
     // be unavailable or not yet populated when fetch resolves in the browser.
     const timing = response.headers.get('server-timing') || '';

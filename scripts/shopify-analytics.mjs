@@ -5,10 +5,13 @@ let permitted = false;
 let pageSent = false;
 let shopId;
 let pending = Promise.resolve();
+let requestedConsent;
 
 window.RufforaShopify = {
   consent(granted) {
     permitted = granted;
+    if (requestedConsent === granted) return pending;
+    requestedConsent = granted;
     pending = pending.catch(() => {}).then(async () => {
       const response = await fetch('/api/shopify-session', {
         method: 'POST',
@@ -32,6 +35,9 @@ window.RufforaShopify = {
         currency: 'USD', acceptedLanguage: 'en', pageType: 'index',
       } });
       pageSent = true;
+    }).catch(error => {
+      if (requestedConsent === granted) requestedConsent = undefined;
+      throw error;
     });
     pending.catch(error => console.warn('[Ruffora Shopify analytics]', error.message));
     return pending;

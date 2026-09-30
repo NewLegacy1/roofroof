@@ -21,6 +21,7 @@ test('consented landing-page visit is sent once before any checkout, with Shopif
   await api.consent(true);
   await api.consent(true);
   assert.equal(events.length,1);
+  assert.equal(requests.length,1);
   assert.equal(events[0].eventName,'PAGE_VIEW');
   assert.equal(events[0].payload.shopifySalesChannel,'hydrogen');
   assert.equal(events[0].payload.storefrontId,'1000181287');
