@@ -12,7 +12,12 @@ preview/
 !.env.example
 
 # Local Evolve skills (machine-specific, not for the public repo)
-.claude/skills/
 
 .vercel
 .env*
+
+# Origins agent team (installed by Origins Brain/Agents/install.py)
+.claude/agents/
+.claude/skills/
+.claude/settings.local.json
+.mcp.json
