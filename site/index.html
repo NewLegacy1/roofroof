@@ -146,7 +146,6 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .pack .pr b{font-size:20px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.15}
 .pack .pr s{font-size:12.5px;color:var(--soft);font-variant-numeric:tabular-nums}
 .dog-size{display:grid;gap:8px}
-.dog-size p{font-size:14px;font-weight:700;color:var(--ink)}
 .tb{overflow:hidden;background:var(--sage-bg);border-bottom:1px solid var(--line)}
 .tb-track{display:flex;width:max-content;margin:0;padding:0;list-style:none;animation:tb-scroll 45s linear infinite}
 .tb:hover .tb-track{animation-play-state:paused}
@@ -154,18 +153,12 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .tb li svg{width:20px;height:20px;flex:none;color:var(--green)}
 @keyframes tb-scroll{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.tb{overflow-x:auto}.tb-track{animation:none}.tb li[aria-hidden]{display:none}}
-.size-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.size-opts button{min-height:52px;padding:6px 4px;border:1.5px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);font:800 14px/1.2 var(--ui);cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
 .dg{display:flex;align-items:flex-end;justify-content:center;flex:none}
 .dg img{display:block;width:auto;max-width:none}
 .dg-s img{height:32px}.dg-m img{height:42px}.dg-l img{height:52px}
-.size-opts button .dg{height:52px;margin:2px auto 6px}
 .serve-row .who{display:flex;align-items:center;gap:10px}.serve-row .who small{white-space:nowrap}
 .serve-row{padding-block:10px}.serve-row .who .dg{width:58px;height:44px}
 .serve-row .who .dg-s img{height:26px}.serve-row .who .dg-m img{height:34px}.serve-row .who .dg-l img{height:42px}
-.size-opts button small{display:block;font-size:11px;font-weight:600;color:var(--soft);margin-top:2px}
-.size-opts button:hover{border-color:var(--sage)}
-.size-opts button[aria-pressed="true"]{background:var(--sage-bg);border-color:var(--green);box-shadow:0 3px 0 var(--green);color:var(--green)}
 .pill{background:var(--apricot-bg);color:var(--apricot-ink);font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:20px;white-space:nowrap}
 
 .auto-refill{border:1.5px solid var(--green);background:var(--sage-bg);border-radius:var(--r);padding:9px 12px;display:grid;gap:7px}.auto-refill label{display:flex;gap:11px;align-items:center;cursor:pointer}.auto-refill input{appearance:none;width:23px;height:23px;flex:0 0 23px;margin:0;border:1.5px solid #81938b;border-radius:6px;background:#fff;display:grid;place-content:center}.auto-refill input:checked{background:var(--green);border-color:var(--green)}.auto-refill input:checked:after{content:"✓";color:#fff;font-size:15px;font-weight:900}.auto-refill b{display:block;font-size:15.5px;color:var(--green)}.auto-refill small{display:none}.save-warning{display:none;border-radius:10px;background:#fbe8de;color:#8f3f1c;padding:10px 12px;font-size:11px;font-weight:800}.save-warning.show{display:block}.unlocks{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:19px 12px 13px;background:#fff}.unlocks>strong{position:absolute;left:12px;top:-11px;padding:3px 10px;border:1px solid var(--line);border-radius:8px;background:var(--ivory);color:var(--green);font-size:10px;letter-spacing:.08em;text-transform:uppercase}.unlock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.unlock{min-width:0;display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;text-align:center;padding:7px 3px;border-radius:11px;background:var(--sage-bg)}.unlock.locked{filter:grayscale(.8);opacity:.5;background:#f4f2ee}.unlock img{width:36px;height:36px;object-fit:contain}.unlock-icon{width:36px;height:36px;border-radius:50%;display:grid;place-content:center;background:var(--green);color:#fff}.unlock-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}.unlock b{display:block;color:var(--green);font-size:9px;line-height:1.2}.unlock small{display:block;color:var(--soft);font-size:7.5px;line-height:1.2}.unlock-state{font-weight:900;color:#008e69!important}
@@ -451,15 +444,6 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
         <li><svg><use href="#check"/></svg>30-day guarantee</li>
         <li><svg><use href="#check"/></svg>Skip or cancel anytime</li>
       </ul>
-
-      <div class="dog-size">
-        <p id="size-label">Choose dog size:</p>
-        <div class="size-opts" id="size-opts" role="group" aria-labelledby="size-label">
-          <button type="button" data-pack="1" aria-pressed="false"><span class="dg dg-s"><img src="/assets/dogs/dog-small.webp" alt="" width="720" height="659" loading="lazy" decoding="async"></span>Under 25 lb</button>
-          <button type="button" data-pack="2" aria-pressed="false"><span class="dg dg-m"><img src="/assets/dogs/dog-medium.webp" alt="" width="720" height="602" loading="lazy" decoding="async"></span>25–75 lb</button>
-          <button type="button" data-pack="3" aria-pressed="false"><span class="dg dg-l"><img src="/assets/dogs/dog-large.webp" alt="" width="720" height="667" loading="lazy" decoding="async"></span>75+ lb</button>
-        </div>
-      </div>
 
       <div class="choose">Choose your supply<span>Each lasts about a month</span></div>
       <div class="packs" id="packs" role="radiogroup" aria-label="How many tubs"></div>
