@@ -1,11 +1,11 @@
 const { pack } = require("../lib/catalog");
+const { gift } = require("../site/catalog");
 const { cleanAttribution, CAMPAIGN_KEYS } = require('../lib/attribution');
 const { randomUUID } = require('node:crypto');
 const { trackingHeaders, forwardTracking } = require('../lib/shopify-tracking');
 
 const API_VERSION = "2026-07";
 const CHECKOUT_HOST = process.env.SHOPIFY_CHECKOUT_HOST || "";
-const SELLING_PLAN_ID = process.env.SHOPIFY_SELLING_PLAN_ID || "";
 
 function json(res, status, body) {
   res.statusCode = status;
@@ -71,7 +71,7 @@ async function storefrontGraphql(query, variables, ip, req, res) {
   return payload.data;
 }
 
-function resolveLine(body) {
+function resolveCart(body) {
   const packId = Number(body.pack);
   if (![1, 2, 3].includes(packId)) {
     throw new Error("Choose a valid pack.");
@@ -82,11 +82,22 @@ function resolveLine(body) {
     throw new Error("This pack is not configured. Please contact us.");
   }
 
-  // Daily Gut is sold by subscription only, so every cart line carries the monthly selling plan.
-  if (!SELLING_PLAN_ID) {
-    throw new Error("Subscriptions are not configured yet. Please contact us.");
+  const autoRefill = body.autoRefill !== false;
+  if (autoRefill && !offer.sellingPlanGid) {
+    throw new Error("AutoRefill is not configured yet. Please contact us.");
   }
-  return { merchandiseId: offer.variantGid, quantity: 1, sellingPlanId: SELLING_PLAN_ID };
+  const lines = [{
+    merchandiseId: offer.variantGid,
+    quantity: 1,
+    ...(autoRefill ? { sellingPlanId: offer.sellingPlanGid } : {}),
+  }];
+  if (offer.gift) lines.push({ merchandiseId: gift.variantGid, quantity: 1 });
+  return {
+    offer,
+    autoRefill,
+    lines,
+    expectedSubtotal: autoRefill ? offer.autoRefillPrice : offer.oneTimePrice,
+  };
 }
 
 module.exports = async function handler(req, res) {
@@ -104,7 +115,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
-    const line = resolveLine(body);
+    const selection = resolveCart(body);
     const attribution = cleanAttribution(body.attribution);
 
     const data = await storefrontGraphql(
@@ -113,20 +124,20 @@ module.exports = async function handler(req, res) {
           cart {
             checkoutUrl
             cost { subtotalAmount { amount currencyCode } }
-            lines(first: 1) { nodes { merchandise { ... on ProductVariant { id } } } }
+            lines(first: 10) {
+              nodes {
+                merchandise { ... on ProductVariant { id } }
+                cost { totalAmount { amount currencyCode } }
+                discountAllocations { discountedAmount { amount currencyCode } }
+              }
+            }
           }
           userErrors { field message }
         }
       }`,
       {
         input: {
-          lines: [
-            {
-              merchandiseId: line.merchandiseId,
-              quantity: line.quantity,
-              ...(line.sellingPlanId ? { sellingPlanId: line.sellingPlanId } : {}),
-            },
-          ],
+          lines: selection.lines,
           buyerIdentity: { countryCode: "US" },
           attributes: Object.entries(attribution).map(([key, value]) => ({ key, value })),
         },
@@ -149,14 +160,19 @@ module.exports = async function handler(req, res) {
     }
 
     const cart = data.cartCreate.cart;
+    const subtotal = Number(cart.cost.subtotalAmount.amount);
+    if (selection.offer.gift && subtotal > selection.expectedSubtotal + 0.01) {
+      json(res, 409, { ok: false, message: "Your free gift discount is still syncing. Please try again shortly." });
+      return;
+    }
     json(res, 200, {
       ok: true,
       checkoutUrl: checkoutUrl(rawUrl, attribution),
       analytics: {
         eventId: randomUUID(),
         currency: cart.cost.subtotalAmount.currencyCode,
-        value: Number(cart.cost.subtotalAmount.amount),
-        variantId: cart.lines.nodes[0]?.merchandise?.id?.split('/').pop(),
+        value: subtotal,
+        variantId: selection.offer.variantId,
       },
     });
   } catch (error) {

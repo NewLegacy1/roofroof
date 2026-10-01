@@ -2,7 +2,6 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 process.env.SHOPIFY_STORE_DOMAIN = 'example.myshopify.com';
 process.env.SHOPIFY_STOREFRONT_TOKEN = 'test-token';
-process.env.SHOPIFY_SELLING_PLAN_ID = 'gid://shopify/SellingPlan/1000';
 process.env.SHOPIFY_CHECKOUT_HOST = 'checkout.example.com';
 const { offers } = require('../site/catalog');
 // Real variant IDs are pasted into the catalog at launch; give the tests stand-ins.
@@ -20,30 +19,36 @@ function response() {
   return { statusCode: 0, headers: {}, setHeader(k,v) { this.headers[k]=v; }, end(value) { this.body=JSON.parse(value); } };
 }
 
-test('catalog prices match the Ruffora monthly offer table', () => {
-  assert.deepEqual(offers.map(o => [o.tubs, o.price]), [[1, 34], [2, 55], [3, 68]]);
-  // Buy 2, Get 1 Free: three tubs cost the same as two single-tub subscriptions.
-  assert.equal(offers[2].price, Math.round(offers[0].price * 2 * 100) / 100);
+test('catalog prices match the live AutoRefill and one-time offer table', () => {
+  assert.deepEqual(offers.map(o => [o.tubs, o.autoRefillPrice, o.oneTimePrice, o.compareAt]), [
+    [1, 34, 40, 40],
+    [2, 60, 68, 80],
+    [3, 85, 100, 120],
+  ]);
 });
 
-test('every pack is a subscription on its Shopify variant and returns Shopify amounts with campaign attribution', async () => {
+test('every pack supports AutoRefill and one-time checkout with the correct Shopify lines', async () => {
   const originalFetch = global.fetch;
   useTestVariants();
   try {
-    for(const offer of offers) for(const subscribe of [undefined,false,true]) {
+    for(const offer of offers) for(const autoRefill of [undefined,false,true]) {
       let sent;
       global.fetch = async (url, options) => {
         sent = JSON.parse(options.body).variables.input;
-        return { ok:true, json:async()=>({data:{cartCreate:{cart:{checkoutUrl:'https://example.myshopify.com/cart/c/test?key=preserve-me',cost:{subtotalAmount:{amount:String(offer.price),currencyCode:'USD'}},lines:{nodes:[{merchandise:{id:offer.variantGid}}]}},userErrors:[]}}}) };
+        const selected = autoRefill !== false;
+        const amount = selected ? offer.autoRefillPrice : offer.oneTimePrice;
+        const nodes = [{merchandise:{id:offer.variantGid},cost:{totalAmount:{amount:String(amount),currencyCode:'USD'}},discountAllocations:[]}];
+        if (offer.gift) nodes.push({merchandise:{id:'gid://shopify/ProductVariant/67602321571907'},cost:{totalAmount:{amount:'0',currencyCode:'USD'}},discountAllocations:[{discountedAmount:{amount:'8.99',currencyCode:'USD'}}]});
+        return { ok:true, json:async()=>({data:{cartCreate:{cart:{checkoutUrl:'https://example.myshopify.com/cart/c/test?key=preserve-me',cost:{subtotalAmount:{amount:String(amount),currencyCode:'USD'}},lines:{nodes}},userErrors:[]}}}) };
       };
       const res = response();
-      await handler({method:'POST',headers:{},body:{pack:offer.id,...(subscribe===undefined?{}:{subscribe}),attribution:{utm_source:'facebook',utm_campaign:'launch',fbclid:'should-not-transfer'}}},res);
+      await handler({method:'POST',headers:{},body:{pack:offer.id,...(autoRefill===undefined?{}:{autoRefill}),attribution:{utm_source:'facebook',utm_campaign:'launch',fbclid:'should-not-transfer'}}},res);
       assert.equal(res.statusCode,200);
       assert.equal(sent.lines[0].merchandiseId,offer.variantGid);
-      // Older clients may still send subscribe:false; the cart is a subscription regardless.
-      assert.equal(sent.lines[0].sellingPlanId,'gid://shopify/SellingPlan/1000');
+      assert.equal(sent.lines[0].sellingPlanId,(autoRefill===false)?undefined:offer.sellingPlanGid);
+      assert.equal(sent.lines.length,offer.gift?2:1);
       assert.equal(sent.buyerIdentity.countryCode,'US');
-      assert.equal(res.body.analytics.value,offer.price);
+      assert.equal(res.body.analytics.value,(autoRefill===false)?offer.oneTimePrice:offer.autoRefillPrice);
       assert.equal(res.body.analytics.variantId,offer.variantId);
       const url=new URL(res.body.checkoutUrl);
       assert.equal(url.hostname,'checkout.example.com');
@@ -86,6 +91,22 @@ test('Shopify inventory errors prevent redirect and analytics',async()=>{
     const res=response();await handler({method:'POST',headers:{},body:{pack:1}},res);
     assert.equal(res.statusCode,409);assert.equal(res.body.message,'Sold out');assert.equal(res.body.analytics,undefined);
   } finally {global.fetch=originalFetch;restoreVariants();}
+});
+
+test('checkout stops before redirect when Shopify has not made the gift free',async()=>{
+  const originalFetch=global.fetch;
+  const offer=offers[1];
+  global.fetch=async()=>({ok:true,json:async()=>({data:{cartCreate:{cart:{
+    checkoutUrl:'https://example.myshopify.com/cart/c/test',
+    cost:{subtotalAmount:{amount:String(offer.autoRefillPrice+8.99),currencyCode:'USD'}},
+    lines:{nodes:[]},
+  },userErrors:[]}}})});
+  try {
+    const res=response();await handler({method:'POST',headers:{},body:{pack:2,autoRefill:true}},res);
+    assert.equal(res.statusCode,409);
+    assert.match(res.body.message,/free gift discount is still syncing/i);
+    assert.equal(res.body.checkoutUrl,undefined);
+  } finally {global.fetch=originalFetch;}
 });
 
 test('attribution excludes arbitrary data and gates Meta identifiers on explicit consent',()=>{
