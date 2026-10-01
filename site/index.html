@@ -112,19 +112,18 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .thumbs .ph{width:100%;height:100%;border-radius:9px;background:var(--ivory)}
 .thumbs .ph:before{display:none}
 
-.info{display:grid;gap:16px;min-width:0}
-.kicker{display:flex;flex-wrap:wrap;gap:6px}
-.kicker span{display:inline-flex;align-items:center;gap:5px;background:var(--sage);color:var(--green);font-size:12px;font-weight:800;padding:5px 11px 5px 9px;border-radius:20px}
-.kicker svg{width:14px;height:14px;flex-shrink:0}
-.info h1{font-size:40px;letter-spacing:-.03em}
+.info{display:grid;gap:13px;min-width:0}
+.rev-row{display:flex;align-items:center;gap:8px}
+.rev-row .stars{color:#e49a43;font-size:15px;letter-spacing:.06em}
+.rev-row b{font-size:13.5px;color:var(--ink)}
+.callouts{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;list-style:none;padding:4px 0 0;margin:0}
+.callouts li{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--ink)}
+.callouts svg{width:19px;height:19px;color:var(--green);flex-shrink:0}
+.info h1{font-size:47px;letter-spacing:-.03em;line-height:1;margin:0}
 .info h1 small{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em;color:var(--ink);margin-top:6px}
-@media(min-width:768px){.info h1{font-size:52px}.info h1 small{font-size:19px}}
+@media(min-width:768px){.info h1{font-size:58px}.info h1 small{font-size:19px}}
 .pitch{color:var(--muted);font-size:15.5px}
 .symptom-hook{font-size:15.5px;font-weight:800;color:var(--green);margin:10px 0 0}
-
-.quick-trust{display:flex;flex-wrap:wrap;gap:8px 16px;list-style:none;padding:0;margin:0}
-.quick-trust li{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--green)}
-.quick-trust svg{width:15px;height:15px;flex-shrink:0}
 
 .choose{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-top:4px}
 .choose span{font-size:11.5px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--soft);margin-left:8px;order:2}
@@ -402,7 +401,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 <symbol id="tb-shield" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2 4 5v6.2c0 5 3.2 8.7 8 10.8 4.8-2.1 8-5.8 8-10.8V5zM7.8 12.3l1.4-1.4 2 2 4.2-4.3 1.4 1.4-5.6 5.7z"/></symbol>
 </defs></svg>
 
-<div class="announce"><b>Buy 2, get 1 free</b> · AutoRefill available · 30-day guarantee</div>
+<div class="announce"><b>Buy 2, get 3rd tub 50% off</b> · AutoRefill available · 30-day guarantee</div>
 
 <header class="header">
   <div class="wrap">
@@ -437,16 +436,19 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
     </div>
 
     <div class="info">
-      <div class="kicker"><span><svg aria-hidden="true"><use href="#heart"/></svg>Healthy digestion*</span><span><svg aria-hidden="true"><use href="#sprout"/></svg>Probiotics + fiber</span><span><svg aria-hidden="true"><use href="#bone"/></svg>Tasty soft chew</span></div>
-      <h1>Daily Gut<small>Digestive Support Soft Chews for Dogs</small></h1>
+      <div class="rev-row"><span class="stars">★★★★★</span><b>10k reviews</b></div>
+      <div class="eyebrow">Digestive Support Soft Chews for Dogs</div>
+      <h1>Daily Gut</h1>
       <p class="pitch">Probiotics plus prebiotic fiber in one tasty soft chew: 8 beneficial strains with pumpkin, honey, inulin and FOS to help support healthy digestion, gut balance and normal stool quality.*</p>
       <p class="symptom-hook">For the grass eaters, the nonstop paw lickers, and the corn-chip paws.</p>
 
-      <ul class="quick-trust">
-        <li><svg><use href="#check"/></svg>A month's supply, sized to your dog</li>
-        <li><svg><use href="#check"/></svg>30-day guarantee</li>
-        <li><svg><use href="#check"/></svg>Skip or cancel anytime</li>
-        <li><svg><use href="#check"/></svg>Vet reviewed</li>
+      <ul class="callouts">
+        <li><svg aria-hidden="true"><use href="#heart"/></svg>Healthy digestion*</li>
+        <li><svg aria-hidden="true"><use href="#sprout"/></svg>Probiotics + fiber</li>
+        <li><svg aria-hidden="true"><use href="#bone"/></svg>Tasty soft chew</li>
+        <li><svg aria-hidden="true"><use href="#shield-check"/></svg>30-day guarantee</li>
+        <li><svg aria-hidden="true"><use href="#stethoscope"/></svg>Vet reviewed</li>
+        <li><svg aria-hidden="true"><use href="#truck"/></svg>Free shipping</li>
       </ul>
 
       <div class="dog-size">
@@ -465,7 +467,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 
       <button class="btn cart-cta" type="button" id="cta"><span class="cta-label">Add To Cart</span><span class="cta-price"><s id="cta-compare"></s><b id="cta-current"></b></span><span class="cta-arrow" aria-hidden="true">→</span></button>
       <p class="terms" id="terms"></p>
-      <div class="buy-proof"><strong>30-day money-back guarantee</strong><span>·</span><span class="stars">★★★★★</span><span>(10k reviews)</span></div>
+      <div class="buy-proof"><strong>30-day money-back guarantee</strong></div>
 
       <div class="assure">
         <div><svg class="i"><use href="#shield-check"/></svg><span>30-day guarantee<small>Even if opened</small></span></div>
