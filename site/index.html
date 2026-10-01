@@ -140,12 +140,12 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .pack .nm{flex:1;min-width:0}
 .pack .nm strong{display:block;font-size:17px;font-weight:800;color:var(--green)}
 .pack .nm small{display:block;font-size:12.5px;color:var(--soft)}
-.pack .nm .fit{display:block;font-size:12px;font-weight:700;color:var(--apricot-ink);margin-top:2px}
+.pack .nm .fit{display:block;font-size:13.5px;font-weight:800;color:var(--ink);margin-top:3px}
 .pack .pr{text-align:right;display:grid;justify-items:end;gap:3px}
 .pack .pr .sub{display:flex;align-items:center;gap:6px}
 .pack .pr b{font-size:20px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.15}
 .pack .pr s{font-size:12.5px;color:var(--soft);font-variant-numeric:tabular-nums}
-.dog-size{display:grid;gap:8px}
+.dog-size{display:grid;gap:8px}.dog-size p{margin:0;font-size:14px;font-weight:800;color:var(--green)}.weight-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.weight-opts button{min-height:48px;padding:8px 5px;border:1.5px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);font:800 12px/1.2 var(--ui);cursor:pointer}.weight-opts button[aria-pressed="true"]{border-color:var(--green);background:var(--sage-bg);box-shadow:0 2px 0 var(--green);color:var(--green)}
 .tb{overflow:hidden;background:var(--sage-bg);border-bottom:1px solid var(--line)}
 .tb-track{display:flex;width:max-content;margin:0;padding:0;list-style:none;animation:tb-scroll 45s linear infinite}
 .tb:hover .tb-track{animation-play-state:paused}
@@ -161,10 +161,11 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .serve-row .who .dg-s img{height:26px}.serve-row .who .dg-m img{height:34px}.serve-row .who .dg-l img{height:42px}
 .pill{background:var(--apricot-bg);color:var(--apricot-ink);font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:20px;white-space:nowrap}
 
-.auto-refill{border:1.5px solid var(--green);background:var(--sage-bg);border-radius:var(--r);padding:9px 12px;display:grid;gap:7px}.auto-refill label{display:flex;gap:11px;align-items:center;cursor:pointer}.auto-refill input{appearance:none;width:23px;height:23px;flex:0 0 23px;margin:0;border:1.5px solid #81938b;border-radius:6px;background:#fff;display:grid;place-content:center}.auto-refill input:checked{background:var(--green);border-color:var(--green)}.auto-refill input:checked:after{content:"✓";color:#fff;font-size:15px;font-weight:900}.auto-refill b{display:block;font-size:15.5px;color:var(--green)}.auto-refill small{display:none}.save-warning{display:none;border-radius:10px;background:#fbe8de;color:#8f3f1c;padding:10px 12px;font-size:11px;font-weight:800}.save-warning.show{display:block}.unlocks{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:19px 12px 13px;background:#fff}.unlocks>strong{position:absolute;left:12px;top:-11px;padding:3px 10px;border:1px solid var(--line);border-radius:8px;background:var(--ivory);color:var(--green);font-size:10px;letter-spacing:.08em;text-transform:uppercase}.unlock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.unlock{min-width:0;display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;text-align:center;padding:7px 3px;border-radius:11px;background:var(--sage-bg)}.unlock.locked{filter:grayscale(.8);opacity:.5;background:#f4f2ee}.unlock img{width:36px;height:36px;object-fit:contain}.unlock-icon{width:36px;height:36px;border-radius:50%;display:grid;place-content:center;background:var(--green);color:#fff}.unlock-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}.unlock b{display:block;color:var(--green);font-size:9px;line-height:1.2}.unlock small{display:block;color:var(--soft);font-size:7.5px;line-height:1.2}.unlock-state{font-weight:900;color:#008e69!important}
+.auto-refill{border:1.5px solid var(--line);background:#f3f3f0;border-radius:var(--r);padding:0;display:grid;gap:0;transition:.15s}.auto-refill.selected{border-color:var(--green);background:var(--sage-bg)}.auto-refill label{display:flex;gap:11px;align-items:center;cursor:pointer;padding:11px 12px}.auto-refill input{appearance:none;width:23px;height:23px;flex:0 0 23px;margin:0;border:1.5px solid #81938b;border-radius:6px;background:#fff;display:grid;place-content:center}.auto-refill input:checked{background:var(--green);border-color:var(--green)}.auto-refill input:checked:after{content:"✓";color:#fff;font-size:15px;font-weight:900}.auto-refill b{display:block;font-size:14px;color:var(--green)}.save-warning{display:none;margin:0 9px 9px;border-radius:9px;background:#fbe8de;color:#8f3f1c;padding:9px 10px;font-size:11px;font-weight:800}.save-warning.show{display:block}.unlocks{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:19px 12px 13px;background:#fff}.unlocks>strong{position:absolute;left:12px;top:-11px;padding:3px 10px;border:1px solid var(--line);border-radius:8px;background:var(--ivory);color:var(--green);font-size:10px;letter-spacing:.08em;text-transform:uppercase}.unlock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.unlock{min-width:0;display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;text-align:center;padding:7px 3px;border-radius:11px;background:var(--sage-bg)}.unlock.locked{filter:grayscale(.45);opacity:.72;background:#efefec}.unlock img{width:36px;height:36px;object-fit:contain}.unlock-icon{width:36px;height:36px;border-radius:50%;display:grid;place-content:center;background:var(--green);color:#fff}.unlock-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}.unlock b{display:block;color:var(--green);font-size:9px;line-height:1.2}.unlock small{display:block;color:#4e5b56;font-size:7.5px;line-height:1.25}.unlock-state{font-weight:900;color:#008e69!important}
 .pack .pr b small{font-size:13px;font-weight:700;color:var(--soft);letter-spacing:0}
 .pack .pr .day{font-size:11.5px;font-weight:600;color:var(--soft);font-variant-numeric:tabular-nums}
 .terms{font-size:11px;color:var(--soft);margin-top:-8px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}.term-item{display:inline-flex;align-items:center;gap:5px}.term-item svg{width:14px;height:14px;stroke:var(--green);fill:none;stroke-width:1.8}
+.buy-proof{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:-5px;font-size:10.5px;color:var(--soft)}.buy-proof strong{color:var(--green)}.buy-proof .stars{color:#e49a43;letter-spacing:.04em}
 
 .assure{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--r);background:var(--white)}
 .assure div{display:grid;justify-items:center;gap:6px;text-align:center;padding:14px 6px;font-size:12px;font-weight:700;line-height:1.25;color:var(--green)}
@@ -445,13 +446,23 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
         <li><svg><use href="#check"/></svg>Skip or cancel anytime</li>
       </ul>
 
+      <div class="dog-size">
+        <p>How much does your dog weigh? <span style="font-weight:600;color:var(--soft)">(optional)</span></p>
+        <div class="weight-opts" id="weight-opts" role="group" aria-label="Dog weight">
+          <button type="button" data-pack="1" aria-pressed="false">Under 25 lb</button>
+          <button type="button" data-pack="2" aria-pressed="false">25–75 lb</button>
+          <button type="button" data-pack="3" aria-pressed="false">Over 75 lb</button>
+        </div>
+      </div>
+
       <div class="choose">Choose your supply<span>Each lasts about a month</span></div>
       <div class="packs" id="packs" role="radiogroup" aria-label="How many tubs"></div>
-      <div class="unlocks"><strong>Included with your choice</strong><div class="unlock-grid"><div class="unlock" id="shipping-unlock"><span class="unlock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v11H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><span><b>Free shipping</b><small class="unlock-state" id="shipping-state">Unlocked</small></span></div><div class="unlock" id="gift-unlock"><img src="/assets/product/calming-lick-mat-1080.png" alt=""><span><b>Free Calming Lick Mat</b><small class="unlock-state" id="gift-state">Unlocked</small></span></div><div class="unlock locked" id="bundle-unlock"><img src="/assets/product/pack-1.webp" alt=""><span><b>1 Tub 50% Off</b><small class="unlock-state" id="bundle-state">Choose 3 tubs</small></span></div></div></div>
-      <div class="auto-refill"><label><input type="checkbox" id="auto-refill" checked><span><b>AutoRefill &amp; Save Up to 15%</b></span></label><div class="save-warning" id="save-warning"></div></div>
+      <div class="unlocks"><strong>Included with your choice</strong><div class="unlock-grid"><div class="unlock" id="shipping-unlock"><span class="unlock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v11H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><span><b>Free shipping</b><small class="unlock-state" id="shipping-state">Unlocked</small></span></div><div class="unlock" id="gift-unlock"><img src="/assets/product/calming-lick-mat-1080.png" alt=""><span><b>Free Calming Lick Mat</b><small class="unlock-state" id="gift-state">Unlocked</small></span></div><div class="unlock locked" id="bundle-unlock"><img src="/assets/product/pack-1.webp" alt=""><span><b>Tub #3 is 50% off</b><small class="unlock-state" id="bundle-state">Choose 3 tubs</small></span></div></div></div>
+      <div class="auto-refill selected" id="auto-refill-box"><label><input type="checkbox" id="auto-refill" checked><span><b>AutoRefill: Save up to 29% + free shipping</b></span></label><div class="save-warning" id="save-warning"></div></div>
 
       <button class="btn cart-cta" type="button" id="cta"><span class="cta-label">Add To Cart</span><span class="cta-price"><s id="cta-compare"></s><b id="cta-current"></b></span><span class="cta-arrow" aria-hidden="true">→</span></button>
       <p class="terms" id="terms"></p>
+      <div class="buy-proof"><strong>30-day money-back guarantee</strong><span>·</span><span class="stars">★★★★★</span><span>(— reviews)</span></div>
 
       <div class="assure">
         <div><svg class="i"><use href="#shield-check"/></svg><span>30-day guarantee<small>Even if opened</small></span></div>
@@ -676,15 +687,14 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 
 <script>
 const {offers:OFFERS, product:PRODUCT}=window.RUFFORA;
-const state={pack:2,autoRefill:true};
+const state={pack:2,autoRefill:true,weightPack:null};
 const $=id=>document.getElementById(id);
 const money=n=>"$"+(Number.isInteger(n)?n:n.toFixed(2)); // whole-dollar prices show without cents
 const priceOf=o=>state.autoRefill?o.autoRefillPrice:o.oneTimePrice;
-const perDay=o=>money(priceOf(o)/30);
 const tubsTxt=o=>`${o.tubs} tub${o.tubs>1?"s":""}`;
-/* Suggested supply by dog size; the size buttons pick the matching pack. */
-const PACK_FIT={1:"30-day supply · dogs under 25 lb",2:"30-day supply · dogs 25 – 75 lb",3:"30-day supply · dogs over 75 lb"};
-const PACK_DEAL={3:"3rd tub free"};
+const PACK_FIT={1:"Under 25 lb",2:"25–75 lb",3:"Over 75 lb"};
+const PACK_DEAL={3:"3rd tub 50% off"};
+const LOST_SAVINGS={1:11.95,2:13.95,3:15};
 const shipTxt=o=>state.autoRefill||o.id===3?"Free shipping":"$5.95 shipping";
 
 function renderPacks(){
@@ -694,10 +704,9 @@ function renderPacks(){
     return `<label class="pack ${o.badge?"has-badge":""}" for="pack-${o.id}">
       ${o.badge?`<span class="badge ${o.id===3?"dark":""}">${o.badge}</span>`:""}
       <input type="radio" name="pack" id="pack-${o.id}" value="${o.id}" ${o.id===state.pack?"checked":""}>
-      <span class="nm"><strong>${o.name}</strong><small>${tubsTxt(o)}${chews}</small><span class="fit">${PACK_FIT[o.id]}</span></span>
-      <span class="pr"><b>${money(now)}${state.autoRefill?"<small>/mo</small>":""}</b><span class="day">${perDay(o)} a day</span>${o.compareAt>now?`<span class="sub"><s>${money(o.compareAt)}</s><span class="pill">${state.autoRefill?"AutoRefill price":`Save ${off}%`}</span></span>`:""}</span>
+      <span class="nm"><strong>${o.name}</strong><small>${tubsTxt(o)}${chews}</small><span class="fit">${PACK_FIT[o.id]}</span>${o.id===3?'<span class="fit">Buy 2, get the 3rd half off.</span>':''}</span>
+      <span class="pr"><b>${money(now)}${state.autoRefill?"<small>/mo</small>":""}</b><span class="day">${money(now/o.tubs)} / tub</span>${o.compareAt>now?`<span class="sub"><s>${money(o.compareAt)}</s><span class="pill">${state.autoRefill?"AutoRefill price":`Save ${off}%`}</span></span>`:""}</span>
     </label>`}).join("");
-  document.querySelectorAll('input[name="pack"]').forEach(r=>r.addEventListener("change",e=>{state.pack=+e.target.value;update();showPackPhoto()}));
 }
 function update(){
   const o=OFFERS.find(x=>x.id===state.pack), now=priceOf(o);
@@ -706,24 +715,38 @@ function update(){
   $("cta-compare").style.display=o.compareAt>now?"inline":"none";
   $("terms").innerHTML=state.autoRefill
     ? `<span class="term-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg>${tubsTxt(o)} every 30 days</span><span class="term-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Stop or cancel anytime</span>`
-    : `<span class="term-item">${tubsTxt(o)} one-time</span><span class="term-item">${shipTxt(o)}</span>`;
+    : `<span class="term-item">${tubsTxt(o)} one-time</span><span class="term-item">${shipTxt(o)}</span><span class="term-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Stop or cancel anytime</span>`;
   const off=Math.round((1-now/o.compareAt)*100);
   $("deal-badge").textContent=PACK_DEAL[o.id]||(state.autoRefill?"AutoRefill price":(off>0?`Save ${off}%`:""));
   $("st-name").textContent=o.name;
-  $("st-price").textContent=state.autoRefill?`${money(now)}/month · ${perDay(o)} a day`:`${money(now)} one time`;
-  const extra=o.oneTimePrice-o.autoRefillPrice;
-  $("save-warning").textContent=`⚠ You’re paying ${money(extra)} more without AutoRefill`;
+  $("st-price").textContent=state.autoRefill?`${money(now)}/month · ${money(now/o.tubs)} per tub`:`${money(now)} one time · ${money(now/o.tubs)} per tub`;
+  $("save-warning").textContent=`⚠ You’re paying ${money(LOST_SAVINGS[o.id])} more without AutoRefill, including shipping`;
   $("save-warning").classList.toggle("show",!state.autoRefill);
+  $("auto-refill-box").classList.toggle("selected",state.autoRefill);
   const shippingUnlocked=state.autoRefill||o.id===3;
   $("shipping-unlock").classList.toggle("locked",!shippingUnlocked);
-  $("shipping-state").textContent=shippingUnlocked?"Unlocked":`Add ${money(5.95)}`;
+  $("shipping-state").textContent=shippingUnlocked?"Unlocked":"Turn on AutoRefill";
   $("gift-unlock").classList.toggle("locked",!o.gift);
-  $("gift-state").textContent=o.gift?"Unlocked":"Choose 2 or 3 tubs";
+  $("gift-state").textContent=o.gift?"Unlocked":"Choose 2 tubs to unlock";
   const bundleUnlocked=o.id===3;
   $("bundle-unlock").classList.toggle("locked",!bundleUnlocked);
-  $("bundle-state").textContent=bundleUnlocked?"Unlocked":"Choose 3 tubs";
-  document.querySelectorAll("#size-opts button, #serve .serve-row").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.pack===o.id?"true":"false"));
+  $("bundle-state").textContent=bundleUnlocked?"Applied":(o.id===2?`Add a 3rd tub for +${money((state.autoRefill?OFFERS[2].autoRefillPrice:OFFERS[2].oneTimePrice)-now)} to unlock`:"Choose 3 tubs to unlock");
+  document.querySelectorAll("#weight-opts button").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.pack===state.weightPack?"true":"false"));
+  document.querySelectorAll("#serve .serve-row").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.pack===o.id?"true":"false"));
   $("serve-suggest").innerHTML=`Suggested: <b>${tubsTxt(o)}</b>${PRODUCT.chewsPerTub?` (${o.tubs*PRODUCT.chewsPerTub} chews, about 30 days)`:""} · ${money(now)}${state.autoRefill?"/month":" one time"}`;
+}
+
+function renderBuyBox(){
+  renderPacks();
+  update();
+  showPackPhoto();
+}
+
+function setSelection(next){
+  if(next.pack!==undefined&&OFFERS.some(o=>o.id===Number(next.pack))) state.pack=Number(next.pack);
+  if(next.autoRefill!==undefined) state.autoRefill=Boolean(next.autoRefill);
+  if(Object.prototype.hasOwnProperty.call(next,"weightPack")) state.weightPack=next.weightPack;
+  renderBuyBox();
 }
 /* Buy-box photo follows the selected pack (first thumbnail becomes that pack). Add the pack photo paths when you have them. */
 const PACK_PHOTO={1:"/assets/product/pack-1.webp",2:"/assets/product/pack-2.webp",3:"/assets/product/pack-3.webp"};
@@ -751,9 +774,11 @@ function showPackPhoto(){
   first.dataset.photo=src; first.setAttribute("aria-label",label); first.querySelector("img").src=src;
   showSlide(0);
 }
-document.querySelectorAll("#size-opts button, #serve .serve-row").forEach(b=>b.addEventListener("click",()=>{state.pack=+b.dataset.pack;renderPacks();update();showPackPhoto()}));
-renderPacks();update();showPackPhoto();
-$("auto-refill").addEventListener("change",e=>{state.autoRefill=e.target.checked;renderPacks();update()});
+$("packs").addEventListener("change",e=>{if(e.target.matches('input[name="pack"]'))setSelection({pack:e.target.value,weightPack:null})});
+$("weight-opts").addEventListener("click",e=>{const b=e.target.closest("button[data-pack]");if(b)setSelection({pack:b.dataset.pack,weightPack:Number(b.dataset.pack)})});
+document.querySelectorAll("#serve .serve-row").forEach(b=>b.addEventListener("click",()=>setSelection({pack:b.dataset.pack,weightPack:null})));
+$("auto-refill").addEventListener("change",e=>setSelection({autoRefill:e.target.checked}));
+renderBuyBox();
 
 function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),2800)}
 async function goToCheckout(){
@@ -762,9 +787,10 @@ async function goToCheckout(){
   btn.disabled=true;
   const prevText=label.textContent;
   label.textContent="Loading…";
+  const selection={pack:state.pack,autoRefill:state.autoRefill};
   try{
     const shopifyHeaders=await window.RufforaShopify?.headers()||{};
-    const r=await fetch("/api/checkout",{method:"POST",headers:{"Content-Type":"application/json",...shopifyHeaders},body:JSON.stringify({pack:state.pack,autoRefill:state.autoRefill,attribution:window.RufforaTracking?.attribution()||{}})});
+    const r=await fetch("/api/checkout",{method:"POST",headers:{"Content-Type":"application/json",...shopifyHeaders},body:JSON.stringify({...selection,attribution:window.RufforaTracking?.attribution()||{}})});
     const data=await r.json();
     if(!r.ok||!data.ok||!data.checkoutUrl){toast(data.message||"Could not start checkout.");btn.disabled=false;label.textContent=prevText;return}
     if(window.RufforaTracking){
