@@ -40,15 +40,16 @@
   function renderPacks(){
     $("packs").innerHTML=OFFERS.map(function(o){
       var now=priceOf(o), off=Math.round((1-now/o.compareAt)*100);
+      var third=o.id===3?now-2*priceOf(OFFERS[0]):0;
       var chews=PRODUCT.chewsPerTub?" \u00B7 "+(o.tubs*PRODUCT.chewsPerTub)+" chews":"";
       return '<label class="pack'+(o.id===state.pack?" sel":"")+'" for="pack-'+o.id+'">'
         +(o.badge?'<span class="badge">'+o.badge+'</span>':"")
         +'<input type="radio" name="pack" id="pack-'+o.id+'" value="'+o.id+'"'+(o.id===state.pack?" checked":"")+'>'
         +'<span class="nm"><strong>'+o.name+'</strong><small>'+tubsTxt(o)+chews+' \u00B7 '+PACK_FIT[o.id]+'</small>'
-        +(o.id===3?'<small>Buy 2, get the 3rd half off.</small>':"")+'</span>'
+        +(o.id===3?'<small>3rd tub is only '+money(third)+' — half price</small>':"")+'</span>'
         +'<span class="pr"><b>'+money(now)+(state.autoRefill?'<small>/mo</small>':"")+'</b>'
         +'<span class="day">'+money(now/o.tubs)+' / tub</span>'
-        +(o.compareAt>now?'<span class="sub"><s>'+money(o.compareAt)+'</s><span class="pill">'+(state.autoRefill?"AutoRefill price":"Save "+off+"%")+'</span></span>':"")
+        +(o.compareAt>now?'<span class="sub"><s>'+money(o.compareAt)+'</s><span class="pill">'+("Save "+money(o.compareAt-now)+" ("+off+"%)")+'</span></span>':"")
         +'</span></label>';
     }).join("");
   }
