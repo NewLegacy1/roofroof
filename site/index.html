@@ -443,7 +443,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
   <div class="wrap">
     <div class="gallery">
       <!-- Gallery order sells top-down: why it works, what's in it, why it beats probiotics alone, how to serve, real use, label, lifestyle. Pack/bundle shots stay out of the carousel. -->
-      <div class="ph main-img" id="main-img"><img class="shot" fetchpriority="high" decoding="async" id="main-photo" src="/assets/product/pack-1.webp" alt="Ruffora Daily Gut, 1 tub" width="1254" height="1254"><span id="main-fallback" hidden></span><em class="tag" style="font-style:normal">Soft chews for dogs</em><strong class="deal" id="deal-badge"></strong><button type="button" class="g-nav prev" id="g-prev" aria-label="Previous photo"><svg><use href="#arrow-left"/></svg></button><button type="button" class="g-nav next" id="g-next" aria-label="Next photo"><svg><use href="#arrow-right"/></svg></button><span class="g-count" id="g-count" aria-hidden="true"></span></div>
+      <div class="ph main-img" id="main-img"><img class="shot" fetchpriority="high" decoding="async" id="main-photo" src="/assets/product/pack-1.webp" alt="Ruffora Daily Gut, 1 tub" width="1254" height="1254"><span id="main-fallback" hidden></span><em class="tag" style="font-style:normal">Soft chews for dogs</em><button type="button" class="g-nav prev" id="g-prev" aria-label="Previous photo"><svg><use href="#arrow-left"/></svg></button><button type="button" class="g-nav next" id="g-next" aria-label="Next photo"><svg><use href="#arrow-right"/></svg></button><span class="g-count" id="g-count" aria-hidden="true"></span></div>
       <div class="thumbs" id="thumbs">
         <button type="button" aria-current="true" aria-label="Ruffora Daily Gut, 1 tub" data-photo="/assets/product/pack-1.webp"><div class="ph"><img class="shot" src="/assets/product/pack-1.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
         <button type="button" aria-label="8 probiotic strains and 3 billion good bacteria in every soft chew" data-photo="/assets/product/benefits.webp"><div class="ph"><img class="shot" src="/assets/product/benefits.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
@@ -753,7 +753,6 @@ function update(){
     ? `<span class="term-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg>${tubsTxt(o)} every 30 days</span><span class="term-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Stop or cancel anytime</span>`
     : `<span class="term-item">${tubsTxt(o)} one-time</span><span class="term-item">${shipTxt(o)}</span><span class="term-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Stop or cancel anytime</span>`;
   const off=Math.round((1-now/o.compareAt)*100);
-  $("deal-badge").textContent=PACK_DEAL[o.id]||(state.autoRefill?"AutoRefill price":(off>0?`Save ${off}%`:""));
   $("st-name").textContent=o.name;
   $("st-price").textContent=state.autoRefill?`${money(now)}/month · ${money(now/o.tubs)} per tub`:`${money(now)} one time · ${money(now/o.tubs)} per tub`;
   $("save-warning").textContent=`⚠ You’re paying ${money(LOST_SAVINGS[o.id])} more without AutoRefill, including shipping`;
