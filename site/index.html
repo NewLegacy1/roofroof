@@ -100,11 +100,11 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 @media(min-width:768px){.main-img .deal{font-size:14px;padding:7px 14px;top:16px;right:16px}.main-img .tag{top:16px;left:16px}}
 .main-img{background:var(--ivory)}
 .main-img:before{display:none}
-.g-nav{position:absolute;top:50%;z-index:3;width:40px;height:40px;margin-top:-20px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--green);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px rgba(21,62,56,.18);transition:background .15s}
+.g-nav{position:absolute;bottom:12px;z-index:3;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--green);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px rgba(21,62,56,.18);transition:background .15s}
 .g-nav:hover{background:var(--white)}
 .g-nav svg{width:18px;height:18px}
-.g-nav.prev{left:10px}.g-nav.next{right:10px}
-.main-img .g-count{position:absolute;right:12px;bottom:12px;z-index:2;background:rgba(21,62,56,.82);color:var(--ivory);max-width:none;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:20px;font-variant-numeric:tabular-nums}
+.g-nav.prev{left:14px}.g-nav.next{right:14px}
+.main-img .g-count{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;z-index:2;background:rgba(21,62,56,.82);color:var(--ivory);max-width:none;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:20px;font-variant-numeric:tabular-nums}
 .thumbs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 0;scroll-behavior:smooth}
 .thumbs::-webkit-scrollbar{display:none}
 .thumbs button{flex:0 0 calc((100% - 30px)/5.5);padding:0;border:2px solid transparent;border-radius:12px;background:none;cursor:pointer;aspect-ratio:1/1}
@@ -128,15 +128,19 @@ svg.i{width:20px;height:20px;flex-shrink:0}
 .info h1 small{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em;color:var(--ink);margin-top:6px}
 @media(min-width:768px){.info h1{font-size:58px}.info h1 small{font-size:19px}}
 .pitch{color:var(--muted);font-size:15.5px}
+.price-line{font-size:14px;color:var(--muted)}
+.price-line b{color:var(--green);font-size:16.5px}
+.price-line .save{color:var(--apricot-ink);font-weight:800}
 
 /* ---------- MOBILE: pre-buy-box hero fits one viewport (Resilia-style) ---------- */
 @media(max-width:899px){
   .announce .ann-full{display:none}
   .announce .ann-short{display:inline}
-  .pdp{padding-block:12px 32px}
-  .pdp .wrap{gap:14px}
+  .pdp{padding-block:0 32px}
+  .pdp .wrap{gap:14px;padding-inline:0}
+  .main-img{border-radius:0}
   .thumbs{display:none}
-  .info{gap:10px}
+  .info{gap:10px;padding-inline:var(--gut)}
   .info h1{font-size:26px;line-height:1.05}
   .pitch{font-size:14px}
   .callouts{gap:8px 12px}
@@ -430,7 +434,6 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
   </div>
 </header>
 
-<div class="tb" role="region" aria-label="Why dog owners choose Ruffora"><ul class="tb-track"><li><svg aria-hidden="true"><use href="#tb-strains"/></svg>8 probiotic strains</li><li><svg aria-hidden="true"><use href="#tb-flask"/></svg>3 billion CFU per chew</li><li><svg aria-hidden="true"><use href="#tb-pumpkin"/></svg>Pumpkin, 350 mg</li><li><svg aria-hidden="true"><use href="#tb-honey"/></svg>Honey, 140 mg</li><li><svg aria-hidden="true"><use href="#tb-sprout"/></svg>Prebiotic fiber: inulin + FOS</li><li><svg aria-hidden="true"><use href="#tb-bone"/></svg>Soft, tasty chew</li><li><svg aria-hidden="true"><use href="#tb-heartpaw"/></svg>Daily digestive support*</li><li><svg aria-hidden="true"><use href="#tb-shield"/></svg>30-day money-back guarantee</li><li aria-hidden="true"><svg aria-hidden="true"><use href="#tb-strains"/></svg>8 probiotic strains</li><li aria-hidden="true"><svg aria-hidden="true"><use href="#tb-flask"/></svg>3 billion CFU per chew</li><li aria-hidden="true"><svg aria-hidden="true"><use href="#tb-pumpkin"/></svg>Pumpkin, 350 mg</li><li aria-hidden="true"><svg aria-hidden="true"><use href="#tb-honey"/></svg>Honey, 140 mg</li><li aria-hidden="true"><svg aria-hidden="true"><use href="#tb-sprout"/></svg>Prebiotic fiber: inulin + FOS</li><li aria-hidden="true"><svg aria-hidden="true"><use href="#tb-bone"/></svg>Soft, tasty chew</li><li aria-hidden="true"><svg aria-hidden="true"><use href="#tb-heartpaw"/></svg>Daily digestive support*</li><li aria-hidden="true"><svg aria-hidden="true"><use href="#tb-shield"/></svg>30-day money-back guarantee</li></ul></div>
 
 <main id="top">
 
@@ -439,11 +442,12 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
 <section class="pdp" id="shop">
   <div class="wrap">
     <div class="gallery">
-      <!-- Gallery order sells top-down: the pack chosen, why it works, what's in it, why it beats probiotics alone, how to serve, real use, label, lifestyle.
-           The first slot always shows the selected pack (PACK_PHOTO in the script). -->
-      <div class="ph main-img" id="main-img"><img class="shot" fetchpriority="high" decoding="async" id="main-photo" src="/assets/product/pack-2.webp" alt="Ruffora Daily Gut, 2 tubs" width="1254" height="1254"><span id="main-fallback" hidden></span><em class="tag" style="font-style:normal">Soft chews for dogs</em><strong class="deal" id="deal-badge"></strong><button type="button" class="g-nav prev" id="g-prev" aria-label="Previous photo"><svg><use href="#arrow-left"/></svg></button><button type="button" class="g-nav next" id="g-next" aria-label="Next photo"><svg><use href="#arrow-right"/></svg></button><span class="g-count" id="g-count" aria-hidden="true"></span></div>
+      <!-- Gallery order sells top-down: single tub first, then the 2- and 3-tub pack shots, why it works, what's in it, why it beats probiotics alone, how to serve, real use, label, lifestyle. -->
+      <div class="ph main-img" id="main-img"><img class="shot" fetchpriority="high" decoding="async" id="main-photo" src="/assets/product/pack-1.webp" alt="Ruffora Daily Gut, 1 tub" width="1254" height="1254"><span id="main-fallback" hidden></span><em class="tag" style="font-style:normal">Soft chews for dogs</em><strong class="deal" id="deal-badge"></strong><button type="button" class="g-nav prev" id="g-prev" aria-label="Previous photo"><svg><use href="#arrow-left"/></svg></button><button type="button" class="g-nav next" id="g-next" aria-label="Next photo"><svg><use href="#arrow-right"/></svg></button><span class="g-count" id="g-count" aria-hidden="true"></span></div>
       <div class="thumbs" id="thumbs">
-        <button type="button" aria-current="true" aria-label="Ruffora Daily Gut, 2 tubs" data-photo="/assets/product/pack-2.webp"><div class="ph"><img class="shot" src="/assets/product/pack-2.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-current="true" aria-label="Ruffora Daily Gut, 1 tub" data-photo="/assets/product/pack-1.webp"><div class="ph"><img class="shot" src="/assets/product/pack-1.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="Ruffora Daily Gut, 2 tubs" data-photo="/assets/product/pack-2.webp"><div class="ph"><img class="shot" src="/assets/product/pack-2.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
+        <button type="button" aria-label="Ruffora Daily Gut, 3 tubs" data-photo="/assets/product/pack-3.webp"><div class="ph"><img class="shot" src="/assets/product/pack-3.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
         <button type="button" aria-label="8 probiotic strains and 3 billion good bacteria in every soft chew" data-photo="/assets/product/benefits.webp"><div class="ph"><img class="shot" src="/assets/product/benefits.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
         <button type="button" aria-label="Five actives in every chew: probiotics, pumpkin, honey, inulin and FOS" data-photo="/assets/product/five-actives.webp"><div class="ph"><img class="shot" src="/assets/product/five-actives.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
         <button type="button" aria-label="Daily Gut compared with probiotics alone" data-photo="/assets/product/comparison.webp"><div class="ph"><img class="shot" src="/assets/product/comparison.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
@@ -460,6 +464,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
       <div class="eyebrow">Daily Gut</div>
       <h1>Digestive Support Soft Chews for Dogs</h1>
       <p class="pitch"><strong>For the grass eaters, the nonstop paw lickers, and the corn-chip paws.</strong> 8 probiotic strains plus prebiotic fiber with pumpkin, honey, inulin and FOS.*</p>
+      <p class="price-line" id="price-line"></p>
 
       <ul class="callouts">
         <li><svg aria-hidden="true"><use href="#heart"/></svg>Healthy digestion*</li>
@@ -744,6 +749,7 @@ function setLock(id,locked){
 function update(){
   const o=OFFERS.find(x=>x.id===state.pack), now=priceOf(o);
   $("cta-current").textContent=money(now);
+  $("price-line").innerHTML=`From <b>${money(Math.min(...OFFERS.map(x=>x.autoRefillPrice)))}/mo</b> with AutoRefill · <span class="save">Save up to ${Math.max(...OFFERS.map(x=>Math.round((1-x.autoRefillPrice/x.compareAt)*100)))}%</span>`;
   $("cta-compare").textContent=o.compareAt>now?money(o.compareAt):"";
   $("cta-compare").style.display=o.compareAt>now?"inline":"none";
   $("terms").innerHTML=state.autoRefill
@@ -802,10 +808,7 @@ function showSlide(i){
   const strip=$("thumbs"); strip.scrollLeft=b.offsetLeft-strip.offsetLeft-(strip.clientWidth-b.offsetWidth)/2;
 }
 function showPackPhoto(){
-  const o=OFFERS.find(x=>x.id===state.pack), src=PACK_PHOTO[o.id], label=`Ruffora Daily Gut, ${tubsTxt(o)}`;
-  const first=gThumbs()[0];
-  first.dataset.photo=src; first.setAttribute("aria-label",label); first.querySelector("img").src=src;
-  showSlide(0);
+  /* The first slide stays the single tub; the 2- and 3-tub pack shots are their own slides, so pack selection no longer swaps the hero. */
 }
 $("packs").addEventListener("change",e=>{if(e.target.matches('input[name="pack"]'))setSelection({pack:e.target.value,weightPack:null})});
 $("weight-opts").addEventListener("click",e=>{const b=e.target.closest("button[data-pack]");if(b)setSelection({pack:b.dataset.pack,weightPack:Number(b.dataset.pack)})});
@@ -839,6 +842,7 @@ $("cta").addEventListener("click",goToCheckout);
 gThumbs().forEach((b,i)=>b.addEventListener("click",()=>showSlide(i)));
 $("g-prev").addEventListener("click",()=>showSlide(gCur-1));
 $("g-next").addEventListener("click",()=>showSlide(gCur+1));
+showSlide(0);
 (function(){
   let x0=null;
   $("main-img").addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
@@ -888,7 +892,10 @@ $("g-next").addEventListener("click",()=>showSlide(gCur+1));
 /* Sticky bar: visible once the buy button scrolls out of view */
 const sticky=$("sticky");
 if("IntersectionObserver" in window){
-  new IntersectionObserver(([e])=>{const on=!e.isIntersecting&&e.boundingClientRect.top<0;sticky.classList.toggle("show",on);sticky.setAttribute("aria-hidden",!on);$("st-btn").tabIndex=on?0:-1}).observe($("cta"));
+  let pastHero=false, ctaVisible=true;
+  const syncSticky=()=>{const on=pastHero&&!ctaVisible;sticky.classList.toggle("show",on);sticky.setAttribute("aria-hidden",!on);$("st-btn").tabIndex=on?0:-1};
+  new IntersectionObserver(([e])=>{pastHero=!e.isIntersecting&&e.boundingClientRect.top<0;syncSticky()}).observe($("main-img"));
+  new IntersectionObserver(([e])=>{ctaVisible=e.isIntersecting;syncSticky()}).observe($("cta"));
 }
 
 // How it works: progress bar + number pop. Mobile follows the swipe; desktop plays through once in view.
