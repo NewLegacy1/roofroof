@@ -443,7 +443,7 @@ footer.site .fine{font-size:11px;color:rgba(247,242,232,.55);max-width:62ch;line
   <div class="wrap">
     <div class="gallery">
       <!-- Gallery order sells top-down: why it works, what's in it, why it beats probiotics alone, how to serve, real use, label, lifestyle. Pack/bundle shots stay out of the carousel. -->
-      <div class="ph main-img" id="main-img"><img class="shot" fetchpriority="high" decoding="async" id="main-photo" src="/assets/product/pack-1.webp" alt="Ruffora Daily Gut, 1 tub" width="1254" height="1254"><span id="main-fallback" hidden></span><em class="tag" style="font-style:normal">Soft chews for dogs</em><button type="button" class="g-nav prev" id="g-prev" aria-label="Previous photo"><svg><use href="#arrow-left"/></svg></button><button type="button" class="g-nav next" id="g-next" aria-label="Next photo"><svg><use href="#arrow-right"/></svg></button><span class="g-count" id="g-count" aria-hidden="true"></span></div>
+      <div class="ph main-img" id="main-img"><img class="shot" fetchpriority="high" decoding="async" id="main-photo" src="/assets/product/pack-1.webp" alt="Ruffora Daily Gut, 1 tub" width="1254" height="1254"><span id="main-fallback" hidden></span><em class="tag" style="font-style:normal">Soft chews for dogs</em><button type="button" class="g-nav prev" id="g-prev" aria-label="Previous photo"><svg><use href="#arrow-left"/></svg></button><button type="button" class="g-nav next" id="g-next" aria-label="Next photo"><svg><use href="#arrow-right"/></svg></button></div>
       <div class="thumbs" id="thumbs">
         <button type="button" aria-current="true" aria-label="Ruffora Daily Gut, 1 tub" data-photo="/assets/product/pack-1.webp"><div class="ph"><img class="shot" src="/assets/product/pack-1.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
         <button type="button" aria-label="8 probiotic strains and 3 billion good bacteria in every soft chew" data-photo="/assets/product/benefits.webp"><div class="ph"><img class="shot" src="/assets/product/benefits.webp" alt="" loading="lazy" width="1254" height="1254"></div></button>
@@ -801,7 +801,6 @@ function showSlide(i){
   t.forEach(x=>x.setAttribute("aria-current",x===b?"true":"false"));
   $("main-img").classList.toggle("no-tags",gCur!==0);
   showPhoto(b.dataset.photo,b.getAttribute("aria-label"));
-  $("g-count").textContent=`${gCur+1} / ${t.length}`;
   const strip=$("thumbs"); strip.scrollLeft=b.offsetLeft-strip.offsetLeft-(strip.clientWidth-b.offsetWidth)/2;
 }
 function showPackPhoto(){
